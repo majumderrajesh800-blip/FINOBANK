@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ফিনো ব্যাংক - আপনার ডিজিটাল ড্যাশবোর্ড</title>
+    <title>ফিনো ব্যাংক - রাজেশ মজুমদার</title>
     <style>
         body {
             font-family: 'Arial', sans-serif;
@@ -16,77 +16,83 @@
             align-items: center;
             overflow: hidden;
 
-            /* ব্যাকগ্রাউন্ডে ঈগলের ছবি */
-            background-image: url('https://i.imgur.com/your_eagle_image.jpg'); /* এখানে আপনার ঈগলের ছবির লিঙ্ক দিন */
+            /* আপনার পছন্দের ঈগল ব্যাকগ্রাউন্ডের লিঙ্ক এখানে দিন */
+            background-image: url('https://images.unsplash.com/photo-1510113425576-55452e807359?q=80&w=2000&auto=format&fit=crop'); 
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
             position: relative;
         }
 
+        /* ব্যাকগ্রাউন্ডের ওপর হালকা আস্তর */
         body::before {
             content: "";
             position: absolute;
             top: 0; left: 0; right: 0; bottom: 0;
-            background: rgba(0, 0, 0, 0.4); /* হালকা কালো আস্তর */
+            background: rgba(0, 0, 0, 0.4); 
             z-index: 1;
         }
 
         .container {
             max-width: 400px; width: 90%;
-            background: rgba(255, 255, 255, 0.15); /* গ্লাস ইফেক্ট */
-            padding: 30px; border-radius: 20px;
-            backdrop-filter: blur(10px);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            background: rgba(255, 255, 255, 0.12); /* গ্লাস ইফেক্ট */
+            padding: 35px 25px; border-radius: 25px;
+            backdrop-filter: blur(15px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.5);
             border: 1px solid rgba(255, 255, 255, 0.3);
             position: relative; z-index: 10;
-            animation: fadeIn 1s ease-out forwards;
+            animation: slideUp 0.8s ease-out;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(30px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
         .logo {
-            width: 70px; height: 70px; border-radius: 50%;
-            border: 3px solid rgba(255, 255, 255, 0.6);
+            width: 80px; height: 80px; border-radius: 50%;
+            border: 3px solid white;
             margin-bottom: 15px;
-            object-fit: cover;
+            box-shadow: 0 0 15px rgba(255,255,255,0.3);
         }
 
-        h1 { font-size: 26px; margin-bottom: 10px; color: white; text-shadow: 0 0 10px rgba(0,0,0,0.5); }
-        p { font-size: 14px; color: rgba(255, 255, 255, 0.8); margin-bottom: 25px; }
+        h1 { font-size: 24px; margin-bottom: 5px; color: white; }
+        .owner-name { font-size: 16px; color: #fbbf24; font-weight: bold; margin-bottom: 25px; letter-spacing: 1px; }
 
         .btn {
-            display: block; width: 100%; padding: 14px; margin: 10px 0;
+            display: block; width: 100%; padding: 14px; margin: 12px 0;
             background: rgba(255, 255, 255, 0.2);
             color: white; text-decoration: none;
-            border-radius: 10px; font-weight: bold; font-size: 16px;
-            border: 1px solid rgba(255, 255, 255, 0.4); cursor: pointer;
+            border-radius: 12px; font-weight: bold; font-size: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.4);
             transition: all 0.3s ease;
             box-sizing: border-box;
         }
 
         .btn:hover {
-            background: rgba(255, 255, 255, 0.4);
-            transform: translateY(-3px);
+            background: white;
+            color: #d9411e;
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(255,255,255,0.4);
         }
+
+        .btn i { margin-right: 10px; }
     </style>
 </head>
 <body>
 
     <div class="container">
-        <img src="https://i.imgur.com/B9B9z03.png" class="logo" alt="Fino Bank Logo">
+        <img src="https://i.imgur.com/B9B9z03.png" class="logo" alt="Logo">
+        
         <h1>ফিনো ব্যাংক ডিজিটাল</h1>
-        <p>RAJESH MAJUMDER</p>
+        <div class="owner-name">রাজেশ মজুমদার এর ড্যাশবোর্ড</div>
         
         <a href="alllink.html" class="btn">🔗 সব সার্ভিস লিঙ্ক</a>
         <a href="form.html" class="btn">📝 লোন আবেদন ফর্ম</a>
         <a href="khata.html" class="btn">📒 ঋণ গ্রহীতার খাতা</a>
         <a href="passbook.html" class="btn">📖 পাসবুক ভিউ</a>
+        <a href="index.html" class="btn" style="background: rgba(239, 68, 68, 0.5);">🏠 হোম পেজ</a>
     </div>
 
 </body>
 </html>
-
