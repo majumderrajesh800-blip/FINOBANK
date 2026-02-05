@@ -8,7 +8,7 @@
         :root { --fino-red: #d9411e; --fino-blue: #1e3a8a; }
         body, html { margin: 0; padding: 0; font-family: 'Arial', sans-serif; height: 100%; }
 
-        /* প্রধান ড্যাশবোর্ড (ঈগল থিম) */
+        /* প্রধান ড্যাশবোর্ড ব্যাকগ্রাউন্ড (ঈগল থিম) */
         .main-bg {
             background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), 
                         url('https://images.unsplash.com/photo-1510113425576-55452e807359?q=80&w=2000');
@@ -25,7 +25,7 @@
         .logo { width: 70px; border: 2px solid white; border-radius: 50%; margin-bottom: 10px; }
         .name-tag { color: #fbbf24; font-weight: bold; margin-bottom: 25px; font-size: 18px; }
 
-        /* ড্যাশবোর্ডের ৫টি বাটন */
+        /* বাটন স্টাইল (আপনার ফটোর মতো ৫টি বাটন) */
         .nav-btn {
             display: block; padding: 14px; margin: 12px 0; background: rgba(255, 255, 255, 0.2);
             color: white; text-decoration: none; border-radius: 12px; font-weight: bold;
@@ -33,22 +33,30 @@
         }
         .nav-btn:hover { background: white; color: var(--fino-red); transform: scale(1.05); }
 
-        /* পেজ কন্টেন্ট এরিয়া */
+        /* পেজ কন্ট্রোল */
         .page-content { display: none; background: #f0f2f5; min-height: 100vh; padding: 20px; box-sizing: border-box; }
         .active-page { display: block; }
 
-        /* লোন ফর্ম ও অন্যান্য পেজের ডিজাইন */
-        .container-box { max-width: 800px; margin: auto; background: white; padding: 30px; border-radius: 10px; border: 1px solid #ccc; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
-        .page-header { text-align: center; color: var(--fino-red); border-bottom: 2px solid var(--fino-red); margin-bottom: 20px; }
+        /* লোন ফর্ম ডিজাইন */
+        .form-container { max-width: 800px; margin: auto; background: white; padding: 30px; border-radius: 10px; border: 1px solid #ccc; }
+        .form-header { text-align: center; color: var(--fino-red); border-bottom: 2px solid var(--fino-red); margin-bottom: 20px; }
+        .section-header { background: var(--fino-blue); color: white; padding: 10px; font-weight: bold; margin-top: 20px; }
         
-        /* পেজের ভেতরের মেনু স্টাইল (যেটা আপনি চেয়েছিলেন) */
-        .inner-menu { display: flex; justify-content: space-between; background: #f8f9fa; padding: 10px; border-radius: 8px; margin-bottom: 20px; border: 1px solid #ddd; }
-        .inner-menu-btn { text-decoration: none; color: var(--fino-blue); font-weight: bold; font-size: 14px; cursor: pointer; }
-        .inner-menu-btn.home { color: var(--fino-red); }
-
-        .section-title { background: var(--fino-blue); color: white; padding: 10px; font-weight: bold; margin-top: 20px; }
-        label { display: block; margin-top: 15px; font-weight: bold; }
+        label { display: block; margin-top: 15px; font-weight: bold; font-size: 14px; color: #444; }
         input, textarea { width: 100%; padding: 10px; margin-top: 5px; border: 1px solid #ccc; border-radius: 5px; box-sizing: border-box; }
+        
+        .row { display: flex; gap: 15px; flex-wrap: wrap; }
+        .col { flex: 1; min-width: 250px; }
+
+        /* টেবিল */
+        .page2-table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        .page2-table th, .page2-table td { border: 1px solid #333; padding: 10px; text-align: center; }
+
+        .home-btn-red { 
+            display: inline-block; margin-top: 20px; padding: 12px 25px; 
+            background: #ef4444; color: white; border-radius: 50px; 
+            text-decoration: none; font-weight: bold; border: none; cursor: pointer;
+        }
 
         @media print { .no-print { display: none; } }
     </style>
@@ -69,72 +77,83 @@
         </div>
     </div>
 
-    <div id="links-page" class="page-content">
-        <div class="container-box">
-            <div class="inner-menu no-print">
-                <span class="inner-menu-btn home" onclick="showPage('home')">🏠 হোম পেজ</span>
-                <span class="inner-menu-btn">সব লিঙ্ক</span>
-            </div>
-            <div class="page-header"><h2>🔗 গুরুত্বপূর্ণ সার্ভিস লিঙ্ক</h2></div>
-            <a href="https://partner.finobank.com/" target="_blank" class="nav-btn" style="background:var(--fino-blue); color:white; text-align:center;">FINO পার্টনার পোর্টাল</a>
-            <a href="#" class="nav-btn" style="background:var(--fino-blue); color:white; text-align:center;">অন্যান্য লিঙ্ক...</a>
-        </div>
-    </div>
-
     <div id="form-page" class="page-content">
-        <div class="container-box">
-            <div class="inner-menu no-print">
-                <span class="inner-menu-btn home" onclick="showPage('home')">🏠 হোম পেজ</span>
-                <span class="inner-menu-btn">লোন ফর্ম</span>
+        <div class="form-container">
+            <div class="form-header">
+                <h1>Fino Payments Bank Ltd.</h1>
+                <p>Application Form | Branch: TAHERPUR (BC)</p>
             </div>
-            <div class="page-header"><h2>📝 লোন আবেদন ফর্ম</h2><p>Branch: TAHERPUR (BC)</p></div>
+
+            <div class="section-header">আবেদনকারীর ব্যক্তিগত তথ্য (Applicant's Info)</div>
+            <div class="row">
+                <div class="col"><label>আবেদনকারীর নাম (Full Name)</label><input type="text"></div>
+                <div class="col"><label>পিতা/স্বামীর নাম (Father/Spouse Name)</label><input type="text"></div>
+            </div>
+            <div class="row">
+                <div class="col"><label>জন্ম তারিখ (DOB)</label><input type="date"></div>
+                <div class="col"><label>আধার নম্বর (Aadhaar No)</label><input type="text"></div>
+            </div>
+
+            <div class="section-header">যোগাযোগের তথ্য (Contact Details)</div>
+            <label>স্থায়ী ঠিকানা (Permanent Address)</label>
+            <textarea id="p_addr" rows="2"></textarea>
             
-            <div class="section-title">ব্যক্তিগত তথ্য</div>
-            <label>আবেদনকারীর নাম</label><input type="text">
-            <label>স্থায়ী ঠিকানা</label><textarea id="pa" rows="2"></textarea>
-            <button class="no-print" onclick="document.getElementById('ca').value = document.getElementById('pa').value">✓ একই ঠিকানা (Copy)</button>
-            <label>বর্তমান ঠিকানা</label><textarea id="ca" rows="2"></textarea>
+            <button class="no-print" onclick="document.getElementById('c_addr').value = document.getElementById('p_addr').value" style="margin-top:5px; cursor:pointer;">✓ স্থায়ী ঠিকানা কপি করুন (Same Address)</button>
             
-            <div style="text-align:center; margin-top:20px;">
-                <button class="nav-btn" style="background:#22c55e; width:100%; border:none; cursor:pointer;" onclick="alert('সাবমিট হচ্ছে...')">সাবমিট করুন</button>
+            <label>বর্তমান ঠিকানা (Current Address)</label>
+            <textarea id="c_addr" rows="2"></textarea>
+
+            <div class="section-header">অফিস রেকর্ড (Page 2 Tracking)</div>
+            <table class="page2-table">
+                <tr><th>NAME (নাম)</th><th>AMOUNT (পরিমাণ)</th><th>DATE (তারিখ)</th></tr>
+                <tr><td><input type="text" style="border:none; width:100%"></td><td><input type="text" style="border:none; width:100%"></td><td><input type="date" style="border:none; width:100%"></td></tr>
+            </table>
+
+            <div class="no-print" style="text-align:center; margin-top:30px;">
+                <button class="home-btn-red" style="background:#22c55e;" onclick="alert('আবেদনটি রাজেশ মজুমদারের গুগল শিটে সেভ হচ্ছে...')">সাবমিট করুন</button>
+                <button class="home-btn-red" onclick="window.print()">প্রিন্ট ফর্ম</button>
+                <button class="home-btn-red" onclick="showPage('home')">🏠 হোম পেজে ফিরুন</button>
             </div>
         </div>
     </div>
 
-    <div id="khata-page" class="page-content">
-        <div class="container-box" style="background:#1a1a1a; color:white;">
-            <div class="inner-menu no-print" style="background:#333; border:none;">
-                <span class="inner-menu-btn home" style="color:#ff4d4d;" onclick="showPage('home')">🏠 হোম পেজ</span>
-                <span class="inner-menu-btn" style="color:white;">ঋণ খাতা</span>
-            </div>
-            <h1 style="text-align:center; color:#fbbf24;">📒 ঋণ গ্রহীতার খাতা</h1>
-            <div style="display:flex; justify-content:center; gap:20px; flex-wrap:wrap; margin:30px 0;">
-                <div style="padding:20px; border:1px solid #fbbf24; border-radius:10px; width:150px; text-align:center;">👤 ব্যক্তিগত লোন</div>
-                <div style="padding:20px; border:1px solid #fbbf24; border-radius:10px; width:150px; text-align:center;">💼 ব্যবসা লোন</div>
-            </div>
+    <div id="khata-page" class="page-content" style="background:#111; text-align:center; color:white;">
+        <h1 style="color:#fbbf24; margin-top:50px;">📒 ঋণ গ্রহীতার খাতা</h1>
+        <div style="display:flex; justify-content:center; gap:20px; flex-wrap:wrap; margin-top:40px;">
+            <div class="dashboard-card" style="width:220px; cursor:pointer;"><h2>👤</h2><h3>ব্যক্তিগত ঋণ</h3></div>
+            <div class="dashboard-card" style="width:220px; cursor:pointer;"><h2>💼</h2><h3>ব্যবসা ঋণ</h3></div>
+        </div>
+        <button class="home-btn-red" onclick="showPage('home')">🏠 ব্যাক টু ড্যাশবোর্ড</button>
+    </div>
+
+    <div id="links-page" class="page-content" style="text-align:center;">
+        <div class="form-container" style="max-width:450px; margin-top:50px;">
+            <h2 style="color:var(--fino-blue);">🔗 গুরুত্বপূর্ণ সার্ভিস লিঙ্ক</h2>
+            <a href="https://partner.finobank.com/" target="_blank" class="nav-btn" style="background:var(--fino-blue); color:white;">FINO পার্টনার পোর্টাল</a>
+            <a href="#" class="nav-btn" style="background:var(--fino-blue); color:white;">লোন স্ট্যাটাস চেক</a>
+            <button class="home-btn-red" onclick="showPage('home')">🏠 হোম পেজে ফিরুন</button>
         </div>
     </div>
 
-    <div id="passbook-page" class="page-content">
-        <div class="container-box">
-            <div class="inner-menu no-print">
-                <span class="inner-menu-btn home" onclick="showPage('home')">🏠 হোম পেজ</span>
-                <span class="inner-menu-btn">পাসবুক</span>
-            </div>
-            <h2 style="text-align:center;">📖 পাসবুক ভিউ সার্ভিস</h2>
-            <p style="text-align:center;">শীঘ্রই আসছে...</p>
+    <div id="passbook-page" class="page-content" style="text-align:center;">
+        <div class="form-container" style="margin-top:100px;">
+            <h1>📖 পাসবুক ভিউ সার্ভিস</h1>
+            <p>এই পেজটি বর্তমানে ডেভেলপ করা হচ্ছে। রাজেশ মজুমদারের সাথেই থাকুন।</p>
+            <button class="home-btn-red" onclick="showPage('home')">🏠 ব্যাক টু হোম</button>
         </div>
     </div>
 
     <script>
-        function showPage(id) {
+        // পেজ পরিবর্তন করার ফাংশন
+        function showPage(pageId) {
             var pages = document.getElementsByClassName('page-content');
             for (var i = 0; i < pages.length; i++) {
                 pages[i].classList.remove('active-page');
             }
-            document.getElementById(id).classList.add('active-page');
-            window.scrollTo(0,0);
+            document.getElementById(pageId).classList.add('active-page');
+            window.scrollTo(0, 0);
         }
     </script>
+
 </body>
 </html>
