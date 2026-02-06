@@ -3,138 +3,142 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ফিনো ব্যাংক - রাজেশ মজুমদার</title>
+    <title>রাজেশ মজুমদার - ফিনো ডিজিটাল ড্যাশবোর্ড</title>
     <style>
-        :root { --fino-red: #d9411e; --fino-blue: #1e3a8a; }
-        body, html { margin: 0; padding: 0; font-family: 'Arial', sans-serif; height: 100%; }
+        :root {
+            --glass: rgba(255, 255, 255, 0.12);
+            --border: rgba(255, 255, 255, 0.25);
+            --fino-red: #d9411e;
+            --fino-blue: #1e3a8a;
+        }
 
-        /* প্রধান ড্যাশবোর্ড (ঈগল থিম) */
-        .main-bg {
+        body, html {
+            margin: 0; padding: 0; font-family: 'Arial', sans-serif;
+            height: 100vh; overflow: hidden;
+            /* ঈগল পাখির ব্যাকগ্রাউন্ড */
             background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), 
                         url('https://images.unsplash.com/photo-1510113425576-55452e807359?q=80&w=2000');
-            background-size: cover; background-position: center; background-attachment: fixed;
-            min-height: 100vh; display: flex; justify-content: center; align-items: center;
+            background-size: cover; background-position: center;
         }
 
-        .dashboard-card {
-            width: 350px; background: rgba(255, 255, 255, 0.15); backdrop-filter: blur(15px);
-            padding: 30px; border-radius: 25px; border: 1px solid rgba(255, 255, 255, 0.3);
-            text-align: center; color: white; box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+        /* উপরের ছোট নেভিগেশন বার (ছবির মতো) */
+        .top-navbar {
+            background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px);
+            padding: 10px 20px; display: flex; gap: 10px; border-bottom: 1px solid var(--border);
+        }
+        .top-nav-btn {
+            background: #fff; color: #333; padding: 6px 15px; border-radius: 4px;
+            font-size: 13px; font-weight: bold; text-decoration: none; display: flex; align-items: center; gap: 5px;
         }
 
-        .logo { width: 70px; border: 2px solid white; border-radius: 50%; margin-bottom: 10px; }
-        .name-tag { color: #fbbf24; font-weight: bold; margin-bottom: 25px; font-size: 18px; }
+        /* মেইন কন্টেইনার */
+        .layout { display: flex; padding: 30px; gap: 30px; height: calc(100vh - 100px); }
 
-        /* ড্যাশবোর্ডের ৫টি বাটন */
-        .nav-btn {
-            display: block; padding: 14px; margin: 12px 0; background: rgba(255, 255, 255, 0.2);
-            color: white; text-decoration: none; border-radius: 12px; font-weight: bold;
-            border: 1px solid rgba(255, 255, 255, 0.4); transition: 0.3s; cursor: pointer;
+        /* বাম দিকের অংশ (রাজেশ মজুমদার প্রোফাইল কার্ড) */
+        .left-profile {
+            flex: 1; max-width: 420px;
+            background: var(--glass); backdrop-filter: blur(20px);
+            border-radius: 20px; border: 1px solid var(--border);
+            padding: 30px; box-shadow: 0 15px 35px rgba(0,0,0,0.4);
         }
-        .nav-btn:hover { background: white; color: var(--fino-red); transform: scale(1.05); }
 
-        /* পেজ কন্টেন্ট এরিয়া */
-        .page-content { display: none; background: #f0f2f5; min-height: 100vh; padding: 20px; box-sizing: border-box; }
-        .active-page { display: block; }
+        .profile-header { display: flex; align-items: center; gap: 15px; border-bottom: 1px solid var(--border); padding-bottom: 20px; }
+        .fino-logo { width: 75px; height: 75px; border-radius: 50%; border: 2px solid white; background: white; }
 
-        /* লোন ফর্ম ও অন্যান্য পেজের ডিজাইন */
-        .container-box { max-width: 800px; margin: auto; background: white; padding: 30px; border-radius: 10px; border: 1px solid #ccc; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
-        .page-header { text-align: center; color: var(--fino-red); border-bottom: 2px solid var(--fino-red); margin-bottom: 20px; }
-        
-        /* পেজের ভেতরের মেনু স্টাইল (যেটা আপনি চেয়েছিলেন) */
-        .inner-menu { display: flex; justify-content: space-between; background: #f8f9fa; padding: 10px; border-radius: 8px; margin-bottom: 20px; border: 1px solid #ddd; }
-        .inner-menu-btn { text-decoration: none; color: var(--fino-blue); font-weight: bold; font-size: 14px; cursor: pointer; }
-        .inner-menu-btn.home { color: var(--fino-red); }
+        .name-info h2 { margin: 0; color: white; font-size: 22px; }
+        .name-info p { margin: 5px 0 0; color: #fbbf24; font-weight: bold; font-size: 15px; }
 
-        .section-title { background: var(--fino-blue); color: white; padding: 10px; font-weight: bold; margin-top: 20px; }
-        label { display: block; margin-top: 15px; font-weight: bold; }
-        input, textarea { width: 100%; padding: 10px; margin-top: 5px; border: 1px solid #ccc; border-radius: 5px; box-sizing: border-box; }
+        .side-menu { margin-top: 30px; }
+        .menu-item {
+            display: flex; align-items: center; gap: 12px;
+            background: rgba(255,255,255,0.15); padding: 14px; margin-bottom: 12px;
+            border-radius: 10px; border: 1px solid var(--border);
+            color: white; text-decoration: none; font-weight: bold; transition: 0.3s;
+        }
+        .menu-item:hover { background: white; color: var(--fino-red); transform: translateX(8px); }
+        .home-special { background: var(--fino-red) !important; justify-content: center; margin-top: 20px; }
 
-        @media print { .no-print { display: none; } }
+        /* ডান দিকের অংশ (ফাইল সেকশন) */
+        .right-files { flex: 1.5; display: flex; flex-direction: column; gap: 20px; }
+
+        .tab-row { display: flex; gap: 12px; margin-bottom: 5px; }
+        .tab { background: #d9411e; color: white; padding: 8px 18px; border-radius: 5px; font-size: 13px; font-weight: bold; border: none; cursor: pointer; }
+        .tab-blue { background: var(--fino-blue); }
+
+        .file-section {
+            background: rgba(0, 0, 0, 0.45); border-radius: 15px;
+            border: 1px solid var(--border); overflow: hidden; backdrop-filter: blur(10px);
+        }
+        .file-header { background: var(--fino-blue); color: white; padding: 12px 15px; font-size: 13px; font-weight: bold; display: flex; justify-content: space-between; }
+        .file-body { padding: 20px; color: #ddd; font-family: 'Courier New', monospace; font-size: 14px; }
+        .status-dot { color: #22c55e; font-weight: bold; margin-bottom: 10px; display: block; }
+
     </style>
 </head>
 <body>
 
-    <div id="home" class="main-bg page-content active-page">
-        <div class="dashboard-card">
-            <img src="https://i.imgur.com/B9B9z03.png" class="logo">
-            <h2 style="margin:0;">FINO DIGITAL</h2>
-            <div class="name-tag">রাজেশ মজুমদার এর ড্যাশবোর্ড</div>
-            
-            <div class="nav-btn" onclick="showPage('links-page')">🔗 সব সার্ভিস লিঙ্ক</div>
-            <div class="nav-btn" onclick="showPage('form-page')">📝 লোন আবেদন ফর্ম</div>
-            <div class="nav-btn" onclick="showPage('khata-page')">📒 ঋণ গ্রহীতার খাতা</div>
-            <div class="nav-btn" onclick="showPage('passbook-page')">📖 পাসবুক ভিউ</div>
-            <div class="nav-btn" style="background: rgba(239, 68, 68, 0.4);" onclick="showPage('home')">🏠 হোম পেজ</div>
+    <div class="top-navbar">
+        <a href="index.html" class="top-nav-btn">🏠 index.html</a>
+        <a href="alllink.html" class="top-nav-btn">🔗 alllink</a>
+        <a href="form.html" class="top-nav-btn">📝 form</a>
+        <a href="khata.html" class="top-nav-btn">📒 khata</a>
+        <a href="passbook.html" class="top-nav-btn">📖 passbook</a>
+    </div>
+
+    <div class="layout">
+        <div class="left-profile">
+            <div class="profile-header">
+                <img src="https://i.imgur.com/B9B9z03.png" class="fino-logo">
+                <div class="name-info">
+                    <h2>ফিনো ব্যাংক ডিজিটাল</h2>
+                    <p>রাজেশ মজুমদার (TAHERPUR)</p>
+                </div>
+            </div>
+
+            <div class="side-menu">
+                <a href="alllink.html" class="menu-item">🔗 সব সার্ভিসের লিঙ্ক</a>
+                <a href="form.html" class="menu-item">📝 লোন আবেদন ফর্ম</a>
+                <a href="khata.html" class="menu-item">📒 ঋণ গ্রহীতার খাতা</a>
+                <a href="passbook.html" class="menu-item">📖 পাসবুক ভিউ</a>
+                <a href="index.html" class="menu-item home-special">🏠 মেইন হোম পেজ</a>
+            </div>
+        </div>
+
+        <div class="right-files">
+            <div class="tab-row">
+                <button class="tab">🏠 home</button>
+                <button class="tab tab-blue">📁 form.html</button>
+                <button class="tab tab-blue">📁 alllink.html</button>
+                <button class="tab tab-blue">📁 khata.html</button>
+            </div>
+
+            <div class="file-section">
+                <div class="file-header">
+                    <span>div id="form" class="Section"</span>
+                    <span style="opacity: 0.7;">Active Now</span>
+                </div>
+                <div class="file-body">
+                    <span class="status-dot">● System Online</span>
+                    <div>> Loading path: /users/taherpur/form.html</div>
+                    <div>> Accessing Database: GOOGLE_SHEET_V1</div>
+                    <p style="color: white; font-family: Arial; margin-top: 15px;">
+                        এখানে আপনার লোন অ্যাপ্লিকেশন ফর্মের কাজ করা হবে। সাবমিট বাটনে ক্লিক করলে ডেটা সরাসরি শিটে চলে যাবে।
+                    </p>
+                </div>
+            </div>
+
+            <div class="file-section">
+                <div class="file-header">
+                    <span>div id="alllink" class="Section"</span>
+                </div>
+                <div class="file-body">
+                    <p style="color: white; font-family: Arial;">
+                        সব গুরুত্বপূর্ণ লিঙ্ক এবং পোর্টাল এখানে অ্যাড করা আছে।
+                    </p>
+                </div>
+            </div>
         </div>
     </div>
 
-    <div id="links-page" class="page-content">
-        <div class="container-box">
-            <div class="inner-menu no-print">
-                <span class="inner-menu-btn home" onclick="showPage('home')">🏠 হোম পেজ</span>
-                <span class="inner-menu-btn">সব লিঙ্ক</span>
-            </div>
-            <div class="page-header"><h2>🔗 গুরুত্বপূর্ণ সার্ভিস লিঙ্ক</h2></div>
-            <a href="https://partner.finobank.com/" target="_blank" class="nav-btn" style="background:var(--fino-blue); color:white; text-align:center;">FINO পার্টনার পোর্টাল</a>
-            <a href="#" class="nav-btn" style="background:var(--fino-blue); color:white; text-align:center;">অন্যান্য লিঙ্ক...</a>
-        </div>
-    </div>
-
-    <div id="form-page" class="page-content">
-        <div class="container-box">
-            <div class="inner-menu no-print">
-                <span class="inner-menu-btn home" onclick="showPage('home')">🏠 হোম পেজ</span>
-                <span class="inner-menu-btn">লোন ফর্ম</span>
-            </div>
-            <div class="page-header"><h2>📝 লোন আবেদন ফর্ম</h2><p>Branch: TAHERPUR (BC)</p></div>
-            
-            <div class="section-title">ব্যক্তিগত তথ্য</div>
-            <label>আবেদনকারীর নাম</label><input type="text">
-            <label>স্থায়ী ঠিকানা</label><textarea id="pa" rows="2"></textarea>
-            <button class="no-print" onclick="document.getElementById('ca').value = document.getElementById('pa').value">✓ একই ঠিকানা (Copy)</button>
-            <label>বর্তমান ঠিকানা</label><textarea id="ca" rows="2"></textarea>
-            
-            <div style="text-align:center; margin-top:20px;">
-                <button class="nav-btn" style="background:#22c55e; width:100%; border:none; cursor:pointer;" onclick="alert('সাবমিট হচ্ছে...')">সাবমিট করুন</button>
-            </div>
-        </div>
-    </div>
-
-    <div id="khata-page" class="page-content">
-        <div class="container-box" style="background:#1a1a1a; color:white;">
-            <div class="inner-menu no-print" style="background:#333; border:none;">
-                <span class="inner-menu-btn home" style="color:#ff4d4d;" onclick="showPage('home')">🏠 হোম পেজ</span>
-                <span class="inner-menu-btn" style="color:white;">ঋণ খাতা</span>
-            </div>
-            <h1 style="text-align:center; color:#fbbf24;">📒 ঋণ গ্রহীতার খাতা</h1>
-            <div style="display:flex; justify-content:center; gap:20px; flex-wrap:wrap; margin:30px 0;">
-                <div style="padding:20px; border:1px solid #fbbf24; border-radius:10px; width:150px; text-align:center;">👤 ব্যক্তিগত লোন</div>
-                <div style="padding:20px; border:1px solid #fbbf24; border-radius:10px; width:150px; text-align:center;">💼 ব্যবসা লোন</div>
-            </div>
-        </div>
-    </div>
-
-    <div id="passbook-page" class="page-content">
-        <div class="container-box">
-            <div class="inner-menu no-print">
-                <span class="inner-menu-btn home" onclick="showPage('home')">🏠 হোম পেজ</span>
-                <span class="inner-menu-btn">পাসবুক</span>
-            </div>
-            <h2 style="text-align:center;">📖 পাসবুক ভিউ সার্ভিস</h2>
-            <p style="text-align:center;">শীঘ্রই আসছে...</p>
-        </div>
-    </div>
-
-    <script>
-        function showPage(id) {
-            var pages = document.getElementsByClassName('page-content');
-            for (var i = 0; i < pages.length; i++) {
-                pages[i].classList.remove('active-page');
-            }
-            document.getElementById(id).classList.add('active-page');
-            window.scrollTo(0,0);
-        }
-    </script>
 </body>
 </html>
