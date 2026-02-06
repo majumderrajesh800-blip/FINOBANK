@@ -3,155 +3,135 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ফিনো ব্যাংক - রাজেশ মজুমদার</title>
+    <title>ফিনো ব্যাংক - আপনার ডিজিটাল ড্যাশবোর্ড</title>
     <style>
-        :root { --fino-red: #d9411e; --fino-blue: #1e3a8a; }
-        body, html { margin: 0; padding: 0; font-family: 'Arial', sans-serif; height: 100%; }
+        body { 
+            font-family: 'Arial', sans-serif; 
+            color: white; 
+            text-align: center; 
+            margin: 0; 
+            min-height: 100vh;
+            display: flex; 
+            justify-content: center; 
+            align-items: center;
+            overflow: hidden;
 
-        /* প্রধান ড্যাশবোর্ড ব্যাকগ্রাউন্ড (ঈগল থিম) */
-        .main-bg {
-            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), 
-                        url('https://images.unsplash.com/photo-1510113425576-55452e807359?q=80&w=2000');
-            background-size: cover; background-position: center; background-attachment: fixed;
-            min-height: 100vh; display: flex; justify-content: center; align-items: center;
+            /* ব্যাকগ্রাউন্ডে ঈগলের ছবি */
+            background-image: url('https://i.imgur.com/your_eagle_image.jpg'); /* এখানে আপনার ঈগলের ছবির লিঙ্ক দিন */
+            background-size: cover; /* পুরো স্ক্রিন জুড়ে থাকবে */
+            background-position: center; /* ছবিটি মাঝখানে থাকবে */
+            background-attachment: fixed; /* স্ক্রল করলেও ছবিটি স্থির থাকবে */
+            position: relative;
         }
 
-        .dashboard-card {
-            width: 350px; background: rgba(255, 255, 255, 0.15); backdrop-filter: blur(15px);
-            padding: 30px; border-radius: 25px; border: 1px solid rgba(255, 255, 255, 0.3);
-            text-align: center; color: white; box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+        /* ব্যাকগ্রাউন্ডের ওপর হালকা কালো শেড (ছবিকে স্পষ্ট করার জন্য) */
+        body::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0, 0, 0, 0.4); /* স্বচ্ছ কালো আস্তর */
+            z-index: 1;
         }
 
-        .logo { width: 70px; border: 2px solid white; border-radius: 50%; margin-bottom: 10px; }
-        .name-tag { color: #fbbf24; font-weight: bold; margin-bottom: 25px; font-size: 18px; }
-
-        /* বাটন স্টাইল (আপনার ফটোর মতো ৫টি বাটন) */
-        .nav-btn {
-            display: block; padding: 14px; margin: 12px 0; background: rgba(255, 255, 255, 0.2);
-            color: white; text-decoration: none; border-radius: 12px; font-weight: bold;
-            border: 1px solid rgba(255, 255, 255, 0.4); transition: 0.3s; cursor: pointer;
-        }
-        .nav-btn:hover { background: white; color: var(--fino-red); transform: scale(1.05); }
-
-        /* পেজ কন্ট্রোল */
-        .page-content { display: none; background: #f0f2f5; min-height: 100vh; padding: 20px; box-sizing: border-box; }
-        .active-page { display: block; }
-
-        /* লোন ফর্ম ডিজাইন */
-        .form-container { max-width: 800px; margin: auto; background: white; padding: 30px; border-radius: 10px; border: 1px solid #ccc; }
-        .form-header { text-align: center; color: var(--fino-red); border-bottom: 2px solid var(--fino-red); margin-bottom: 20px; }
-        .section-header { background: var(--fino-blue); color: white; padding: 10px; font-weight: bold; margin-top: 20px; }
-        
-        label { display: block; margin-top: 15px; font-weight: bold; font-size: 14px; color: #444; }
-        input, textarea { width: 100%; padding: 10px; margin-top: 5px; border: 1px solid #ccc; border-radius: 5px; box-sizing: border-box; }
-        
-        .row { display: flex; gap: 15px; flex-wrap: wrap; }
-        .col { flex: 1; min-width: 250px; }
-
-        /* টেবিল */
-        .page2-table { width: 100%; border-collapse: collapse; margin-top: 20px; }
-        .page2-table th, .page2-table td { border: 1px solid #333; padding: 10px; text-align: center; }
-
-        .home-btn-red { 
-            display: inline-block; margin-top: 20px; padding: 12px 25px; 
-            background: #ef4444; color: white; border-radius: 50px; 
-            text-decoration: none; font-weight: bold; border: none; cursor: pointer;
+        .container { 
+            max-width: 400px; width: 90%; 
+            background: rgba(255, 255, 255, 0.15); /* স্বচ্ছ সাদা ব্যাকগ্রাউন্ড */
+            padding: 30px; border-radius: 20px; 
+            backdrop-filter: blur(10px); /* গ্লাস ইফেক্ট */
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3); 
+            border: 1px solid rgba(255, 255, 255, 0.3); /* সাদা বর্ডার */
+            position: relative; z-index: 10;
+            animation: fadeIn 1s ease-out forwards; /* লোড হওয়ার অ্যানিমেশন */
         }
 
-        @media print { .no-print { display: none; } }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* লোগো */
+        .logo {
+            width: 70px; height: 70px; border-radius: 50%; 
+            border: 3px solid rgba(255, 255, 255, 0.6); 
+            margin-bottom: 15px;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+            object-fit: cover;
+        }
+
+        h1 { font-size: 26px; margin-bottom: 10px; color: white; text-shadow: 0 0 10px rgba(0,0,0,0.5); }
+        p { font-size: 14px; color: rgba(255, 255, 255, 0.8); margin-bottom: 25px; }
+
+        .btn { 
+            display: block; width: 100%; padding: 14px; margin: 10px 0; 
+            background: rgba(255, 255, 255, 0.2); /* হালকা স্বচ্ছ বাটন */
+            color: white; text-decoration: none; 
+            border-radius: 10px; font-weight: bold; font-size: 16px; 
+            border: 1px solid rgba(255, 255, 255, 0.4); cursor: pointer; 
+            transition: all 0.3s ease;
+            box-sizing: border-box;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+
+        .btn:hover { 
+            background: rgba(255, 255, 255, 0.4); 
+            transform: translateY(-3px); 
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        .back-btn { background: rgba(233, 69, 96, 0.8); border: 1px solid rgba(233, 69, 96, 1); margin-top: 20px; }
+        .back-btn:hover { background: rgba(233, 69, 96, 1); }
+
+        /* সেকশন ম্যানেজমেন্ট */
+        .page-section { display: none; animation: slideIn 0.5s forwards; }
+        .active { display: block; }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(30px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
     </style>
 </head>
 <body>
 
-    <div id="home" class="main-bg page-content active-page">
-        <div class="dashboard-card">
-            <img src="https://i.imgur.com/B9B9z03.png" class="logo">
-            <h2 style="margin:0;">FINO DIGITAL</h2>
-            <div class="name-tag">রাজেশ মজুমদার এর ড্যাশবোর্ড</div>
+    <div class="container">
+        
+        <div id="home" class="page-section active">
+            <img src="https://i.imgur.com/B9B9z03.png" class="logo" alt="Fino Bank Logo">
+            <h1>ফিনো ব্যাংক ডিজিটাল</h1>
+            <p>আজিজুল ইসলামের ড্যাশবোর্ড</p>
             
-            <div class="nav-btn" onclick="showPage('links-page')">🔗 সব সার্ভিস লিঙ্ক</div>
-            <div class="nav-btn" onclick="showPage('form-page')">📝 লোন আবেদন ফর্ম</div>
-            <div class="nav-btn" onclick="showPage('khata-page')">📒 ঋণ গ্রহীতার খাতা</div>
-            <div class="nav-btn" onclick="showPage('passbook-page')">📖 পাসবুক ভিউ</div>
-            <div class="nav-btn" style="background: rgba(239, 68, 68, 0.4);" onclick="showPage('home')">🏠 হোম পেজ</div>
+            <button class="btn" onclick="showSection('services')">🔗 সব সার্ভিস লিঙ্ক</button>
+            <button class="btn" onclick="showSection('form')">📝 অ্যাপ্লিকেশন ফর্ম</button>
+            <button class="btn" onclick="showSection('passbook')">📖 পাসবুক ও খাতা</button>
         </div>
-    </div>
 
-    <div id="form-page" class="page-content">
-        <div class="form-container">
-            <div class="form-header">
-                <h1>Fino Payments Bank Ltd.</h1>
-                <p>Application Form | Branch: TAHERPUR (BC)</p>
-            </div>
-
-            <div class="section-header">আবেদনকারীর ব্যক্তিগত তথ্য (Applicant's Info)</div>
-            <div class="row">
-                <div class="col"><label>আবেদনকারীর নাম (Full Name)</label><input type="text"></div>
-                <div class="col"><label>পিতা/স্বামীর নাম (Father/Spouse Name)</label><input type="text"></div>
-            </div>
-            <div class="row">
-                <div class="col"><label>জন্ম তারিখ (DOB)</label><input type="date"></div>
-                <div class="col"><label>আধার নম্বর (Aadhaar No)</label><input type="text"></div>
-            </div>
-
-            <div class="section-header">যোগাযোগের তথ্য (Contact Details)</div>
-            <label>স্থায়ী ঠিকানা (Permanent Address)</label>
-            <textarea id="p_addr" rows="2"></textarea>
-            
-            <button class="no-print" onclick="document.getElementById('c_addr').value = document.getElementById('p_addr').value" style="margin-top:5px; cursor:pointer;">✓ স্থায়ী ঠিকানা কপি করুন (Same Address)</button>
-            
-            <label>বর্তমান ঠিকানা (Current Address)</label>
-            <textarea id="c_addr" rows="2"></textarea>
-
-            <div class="section-header">অফিস রেকর্ড (Page 2 Tracking)</div>
-            <table class="page2-table">
-                <tr><th>NAME (নাম)</th><th>AMOUNT (পরিমাণ)</th><th>DATE (তারিখ)</th></tr>
-                <tr><td><input type="text" style="border:none; width:100%"></td><td><input type="text" style="border:none; width:100%"></td><td><input type="date" style="border:none; width:100%"></td></tr>
-            </table>
-
-            <div class="no-print" style="text-align:center; margin-top:30px;">
-                <button class="home-btn-red" style="background:#22c55e;" onclick="alert('আবেদনটি রাজেশ মজুমদারের গুগল শিটে সেভ হচ্ছে...')">সাবমিট করুন</button>
-                <button class="home-btn-red" onclick="window.print()">প্রিন্ট ফর্ম</button>
-                <button class="home-btn-red" onclick="showPage('home')">🏠 হোম পেজে ফিরুন</button>
-            </div>
+        <div id="services" class="page-section">
+            <h2>সার্ভিস লিঙ্ক</h2>
+            <a href="#" class="btn">পোর্টাল ১</a>
+            <a href="#" class="btn">পোর্টাল ২</a>
+            <button class="btn back-btn" onclick="showSection('home')">🏠 হোমে ফিরুন</button>
         </div>
-    </div>
 
-    <div id="khata-page" class="page-content" style="background:#111; text-align:center; color:white;">
-        <h1 style="color:#fbbf24; margin-top:50px;">📒 ঋণ গ্রহীতার খাতা</h1>
-        <div style="display:flex; justify-content:center; gap:20px; flex-wrap:wrap; margin-top:40px;">
-            <div class="dashboard-card" style="width:220px; cursor:pointer;"><h2>👤</h2><h3>ব্যক্তিগত ঋণ</h3></div>
-            <div class="dashboard-card" style="width:220px; cursor:pointer;"><h2>💼</h2><h3>ব্যবসা ঋণ</h3></div>
+        <div id="form" class="page-section">
+            <h2>অ্যাপ্লিকেশন ফর্ম</h2>
+            <p>আপনার তথ্য পূরণ করুন</p>
+            <a href="আপনার_গুগল_ফর্ম_লিঙ্ক" class="btn" style="background: rgba(34, 197, 94, 0.8); border: 1px solid rgba(34, 197, 94, 1);">গুগল ফর্ম খুলুন</a>
+            <button class="btn back-btn" onclick="showSection('home')">🏠 হোমে ফিরুন</button>
         </div>
-        <button class="home-btn-red" onclick="showPage('home')">🏠 ব্যাক টু ড্যাশবোর্ড</button>
-    </div>
 
-    <div id="links-page" class="page-content" style="text-align:center;">
-        <div class="form-container" style="max-width:450px; margin-top:50px;">
-            <h2 style="color:var(--fino-blue);">🔗 গুরুত্বপূর্ণ সার্ভিস লিঙ্ক</h2>
-            <a href="https://partner.finobank.com/" target="_blank" class="nav-btn" style="background:var(--fino-blue); color:white;">FINO পার্টনার পোর্টাল</a>
-            <a href="#" class="nav-btn" style="background:var(--fino-blue); color:white;">লোন স্ট্যাটাস চেক</a>
-            <button class="home-btn-red" onclick="showPage('home')">🏠 হোম পেজে ফিরুন</button>
+        <div id="passbook" class="page-section">
+            <h2>পাসবুক ও খাতা</h2>
+            <button class="btn">পাসবুক ভিউ</button>
+            <button class="btn">ঋণ গ্রহীতার খাতা</button>
+            <button class="btn back-btn" onclick="showSection('home')">🏠 হোমে ফিরুন</button>
         </div>
-    </div>
 
-    <div id="passbook-page" class="page-content" style="text-align:center;">
-        <div class="form-container" style="margin-top:100px;">
-            <h1>📖 পাসবুক ভিউ সার্ভিস</h1>
-            <p>এই পেজটি বর্তমানে ডেভেলপ করা হচ্ছে। রাজেশ মজুমদারের সাথেই থাকুন।</p>
-            <button class="home-btn-red" onclick="showPage('home')">🏠 ব্যাক টু হোম</button>
-        </div>
     </div>
 
     <script>
-        // পেজ পরিবর্তন করার ফাংশন
-        function showPage(pageId) {
-            var pages = document.getElementsByClassName('page-content');
-            for (var i = 0; i < pages.length; i++) {
-                pages[i].classList.remove('active-page');
-            }
-            document.getElementById(pageId).classList.add('active-page');
-            window.scrollTo(0, 0);
+        function showSection(sectionId) {
+            document.querySelectorAll('.page-section').forEach(s => s.classList.remove('active'));
+            document.getElementById(sectionId).classList.add('active');
         }
     </script>
 
