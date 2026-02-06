@@ -17,11 +17,11 @@
             height: 100vh; overflow: hidden;
             /* ঈগল পাখির ব্যাকগ্রাউন্ড */
             background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), 
-                        url('https://www.google.com/search?q=f+logo&sca_esv=6db730eca1f1f010&udm=2&biw=1366&bih=641&sxsrf=ANbL-n47-5pGK42yAnjcUj59003TdDdP8g%3A1770352867128&ei=43CFaeW9B8W7seMP0vHcoQQ&ved=0ahUKEwilu5auhsSSAxXFXWwGHdI4N0QQ4dUDCBI&uact=5&oq=f+logo&gs_lp=Egtnd3Mtd2l6LWltZyIGZiBsb2dvMgYQABgHGB4yBhAAGAcYHjIGEAAYBxgeMgYQABgHGB4yBhAAGAcYHjIGEAAYBxgeMgYQABgHGB4yBhAAGAcYHjIGEAAYBxgeMgYQABgHGB5I7RVQuQdY7gtwAXgAkAEAmAGuAaABiQSqAQMwLjO4AQPIAQD4AQGYAgSgArIEwgIHECMYyQIYJ8ICBRAAGIAEmAMAiAYBkgcDMS4zoAe9DrIHAzAuM7gHqATCBwUyLTEuM8gHIoAIAQ&sclient=gws-wiz-img#sv=CAMSVhoyKhBlLWhDOTVlYTBYYVNrNGFNMg5oQzk1ZWEwWGFTazRhTToOTWNZTVF3bVNvWE9VWk0gBCocCgZtb3NhaWMSEGUtaEM5NWVhMFhhU2s0YU0YADABGAcgisTV7AIwAkoIEAIYAiACKAI');
+                        url('https://images.unsplash.com/photo-1510113425576-55452e807359?q=80&w=2000');
             background-size: cover; background-position: center;
         }
 
-        /* উপরের নেভিগেশন বার */
+        /* উপরের ছোট নেভিগেশন বার */
         .top-navbar {
             background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px);
             padding: 10px 20px; display: flex; gap: 10px; border-bottom: 1px solid var(--border);
@@ -35,48 +35,40 @@
 
         /* বাম দিকের প্রোফাইল কার্ড */
         .left-profile {
-            flex: 1; max-width: 420px;
+            flex: 1; max-width: 400px;
             background: var(--glass); backdrop-filter: blur(20px);
             border-radius: 20px; border: 1px solid var(--border);
-            padding: 30px; box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+            padding: 25px; box-shadow: 0 15px 35px rgba(0,0,0,0.4);
         }
 
-        /* গোল লোগো সেকশন - আপনার ছবির সমস্যাটি এখানে সমাধান করা হয়েছে */
         .logo-container { text-align: center; margin-bottom: 15px; }
-        .logo { 
-            width: 80px; height: 80px; border-radius: 50%; 
-            border: 3px solid #fff; object-fit: cover; 
-            box-shadow: 0 0 15px rgba(255,255,255,0.3);
-            background: white;
-        }
+        .logo { width: 85px; height: 85px; border-radius: 50%; border: 3px solid #fff; background: white; object-fit: contain; }
 
-        .profile-header { display: flex; align-items: center; gap: 15px; border-bottom: 1px solid var(--border); padding-bottom: 20px; }
-        .name-info h2 { margin: 0; color: white; font-size: 22px; }
-        .name-info p { margin: 5px 0 0; color: #fbbf24; font-weight: bold; font-size: 15px; }
+        .name-info h2 { margin: 0; color: white; font-size: 20px; text-align: center; }
+        .name-info p { margin: 5px 0 0; color: #fbbf24; font-weight: bold; font-size: 14px; text-align: center; }
 
-        .side-menu { margin-top: 30px; }
+        .side-menu { margin-top: 25px; }
         .menu-item {
             display: flex; align-items: center; gap: 12px;
-            background: rgba(255,255,255,0.15); padding: 14px; margin-bottom: 12px;
+            background: rgba(255,255,255,0.15); padding: 12px; margin-bottom: 10px;
             border-radius: 10px; border: 1px solid var(--border);
             color: white; text-decoration: none; font-weight: bold; transition: 0.3s;
         }
         .menu-item:hover { background: white; color: var(--fino-red); transform: translateX(8px); }
-        .home-special { background: var(--fino-red) !important; justify-content: center; margin-top: 20px; }
 
-        /* ডান দিকের ফাইল সেকশন */
-        .right-files { flex: 1.5; display: flex; flex-direction: column; gap: 20px; }
-        .tab-row { display: flex; gap: 12px; margin-bottom: 5px; }
-        .tab { background: #d9411e; color: white; padding: 8px 18px; border-radius: 5px; font-size: 13px; font-weight: bold; border: none; }
-        .tab-blue { background: var(--fino-blue); }
+        /* ডান দিকের গুগল শিট সেকশন */
+        .right-files { flex: 2; display: flex; flex-direction: column; gap: 20px; }
 
         .file-section {
             background: rgba(0, 0, 0, 0.45); border-radius: 15px;
             border: 1px solid var(--border); overflow: hidden; backdrop-filter: blur(10px);
+            height: 100%;
         }
-        .file-header { background: var(--fino-blue); color: white; padding: 12px 15px; font-size: 13px; font-weight: bold; display: flex; justify-content: space-between; }
-        .file-body { padding: 20px; color: #ddd; font-family: 'Courier New', monospace; font-size: 14px; }
-        .status-dot { color: #22c55e; font-weight: bold; margin-bottom: 10px; display: block; }
+        .file-header { background: var(--fino-blue); color: white; padding: 12px 15px; font-weight: bold; display: flex; justify-content: space-between; }
+        .file-body { height: calc(100% - 45px); background: white; }
+
+        iframe { width: 100%; height: 100%; border: none; }
+
     </style>
 </head>
 <body>
@@ -86,7 +78,6 @@
         <a href="alllink.html" class="top-nav-btn">🔗 alllink</a>
         <a href="form.html" class="top-nav-btn">📝 form</a>
         <a href="khata.html" class="top-nav-btn">📒 khata</a>
-        <a href="passbook.html" class="top-nav-btn">📖 passbook</a>
     </div>
 
     <div class="layout">
@@ -94,52 +85,27 @@
             <div class="logo-container">
                 <img src="https://i.imgur.com/B9B9z03.png" alt="Fino Logo" class="logo">
             </div>
-
-            <div class="profile-header">
-                <div class="name-info">
-                    <h2>ফিনো ব্যাংক ডিজিটাল</h2>
-                    <p>রাজেশ মজুমদার (TAHERPUR)</p>
-                </div>
+            <div class="name-info">
+                <h2>ফিনো ব্যাংক ডিজিটাল</h2>
+                <p>রাজেশ মজুমদার (TAHERPUR)</p>
             </div>
-
             <div class="side-menu">
                 <a href="alllink.html" class="menu-item">🔗 সব সার্ভিসের লিঙ্ক</a>
                 <a href="form.html" class="menu-item">📝 লোন আবেদন ফর্ম</a>
                 <a href="khata.html" class="menu-item">📒 ঋণ গ্রহীতার খাতা</a>
                 <a href="passbook.html" class="menu-item">📖 পাসবুক ভিউ</a>
-                <a href="index.html" class="menu-item home-special">🏠 মেইন হোম পেজ</a>
+                <a href="index.html" class="menu-item" style="background:var(--fino-red); justify-content:center; margin-top:15px;">🏠 মেইন হোম</a>
             </div>
         </div>
 
         <div class="right-files">
-            <div class="tab-row">
-                <button class="tab">🏠 home</button>
-                <button class="tab tab-blue">📁 form.html</button>
-                <button class="tab tab-blue">📁 alllink.html</button>
-                <button class="tab tab-blue">📁 khata.html</button>
-            </div>
-
             <div class="file-section">
                 <div class="file-header">
-                    <span>div id="form" class="Section"</span>
-                    <span style="opacity: 0.7;">Active Now</span>
+                    <span>📊 ডিজিটাল খাতা ও হিসাব (Live Google Sheet)</span>
+                    <span style="font-size: 11px; color: #4ade80;">● Online</span>
                 </div>
                 <div class="file-body">
-                    <span class="status-dot">● System Online</span>
-                    <div>>> Loading path: /users/taherpur/form.html</div>
-                    <div>>> Accessing Database: GOOGLE_SHEET_V1</div>
-                    <p style="color: white; font-family: Arial; margin-top: 15px;">
-                        এখানে আপনার লোন অ্যাপ্লিকেশন ফর্মের কাজ করা হবে। সাবমিট বাটনে ক্লিক করলে ডেটা সরাসরি শিটে চলে যাবে।
-                    </p>
-                </div>
-            </div>
-
-            <div class="file-section">
-                <div class="file-header">
-                    <span>div id="alllink" class="Section"</span>
-                </div>
-                <div class="file-body">
-                    <p style="color: white; font-family: Arial;">সব গুরুত্বপূর্ণ লিঙ্ক এবং পোর্টাল এখানে অ্যাড করা আছে।</p>
+                    <iframe src="https://docs.google.com/spreadsheets/d/1B-q74YQ246fU1vN6tYn8q3u-UaW8N3w5X9y0Z1A2B3C/pubhtml?widget=true&headers=false"></iframe>
                 </div>
             </div>
         </div>
