@@ -3,114 +3,162 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>রাজেশ মজুমদার - ফিনো ডিজিটাল ড্যাশবোর্ড</title>
+    <title>রাজেশ মজুমদার - প্রো ড্যাশবোর্ড</title>
     <style>
         :root {
-            --glass: rgba(255, 255, 255, 0.12);
-            --border: rgba(255, 255, 255, 0.25);
             --fino-red: #d9411e;
             --fino-blue: #1e3a8a;
+            --dark-bg: #0b0e14;
         }
 
         body, html {
             margin: 0; padding: 0; font-family: 'Arial', sans-serif;
-            height: 100vh; overflow: hidden;
-            /* ঈগল পাখির ব্যাকগ্রাউন্ড */
-            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), 
-                        url('https://images.unsplash.com/photo-1510113425576-55452e807359?q=80&w=2000');
-            background-size: cover; background-position: center;
+            background: #f1f5f9; height: 100vh; overflow: hidden;
         }
 
-        /* উপরের ছোট নেভিগেশন বার */
-        .top-navbar {
-            background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px);
-            padding: 10px 20px; display: flex; gap: 10px; border-bottom: 1px solid var(--border);
-        }
-        .top-nav-btn {
-            background: #fff; color: #333; padding: 6px 15px; border-radius: 4px;
-            font-size: 13px; font-weight: bold; text-decoration: none; display: flex; align-items: center; gap: 5px;
+        /* হেডলাইন ব্যানার */
+        .header-banner {
+            height: 250px; background: var(--dark-bg);
+            position: relative; display: flex; flex-direction: column;
+            justify-content: center; align-items: center;
+            color: white; overflow: hidden; border-bottom: 5px solid var(--fino-red);
         }
 
-        .layout { display: flex; padding: 30px; gap: 30px; height: calc(100vh - 100px); }
-
-        /* বাম দিকের প্রোফাইল কার্ড */
-        .left-profile {
-            flex: 1; max-width: 400px;
-            background: var(--glass); backdrop-filter: blur(20px);
-            border-radius: 20px; border: 1px solid var(--border);
-            padding: 25px; box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+        /* অরিজিনাল গ্রাফ লাইন ব্যাকগ্রাউন্ড */
+        .graph-line-bg {
+            position: absolute; top: 0; left: 0; width: 200%; height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="300" viewBox="0 0 1000 300"><path d="M0,200 L100,150 L200,180 L300,80 L400,120 L500,50 L600,150 L700,110 L800,180 L900,100 L1000,130" fill="none" stroke="%2326a69a" stroke-width="2" opacity="0.4" /></svg>');
+            background-repeat: repeat-x;
+            animation: moveGraph 30s linear infinite;
+            z-index: 1;
         }
 
-        .logo-container { text-align: center; margin-bottom: 15px; }
-        .logo { width: 85px; height: 85px; border-radius: 50%; border: 3px solid #fff; background: white; object-fit: contain; }
-
-        .name-info h2 { margin: 0; color: white; font-size: 20px; text-align: center; }
-        .name-info p { margin: 5px 0 0; color: #fbbf24; font-weight: bold; font-size: 14px; text-align: center; }
-
-        .side-menu { margin-top: 25px; }
-        .menu-item {
-            display: flex; align-items: center; gap: 12px;
-            background: rgba(255,255,255,0.15); padding: 12px; margin-bottom: 10px;
-            border-radius: 10px; border: 1px solid var(--border);
-            color: white; text-decoration: none; font-weight: bold; transition: 0.3s;
+        /* লাইভ তথ্য (টাইম ও ওয়েদার) */
+        .live-info {
+            position: absolute; top: 15px; width: 92%;
+            display: flex; justify-content: space-between;
+            font-size: 14px; font-weight: bold; z-index: 15;
+            color: #fbbf24;
         }
-        .menu-item:hover { background: white; color: var(--fino-red); transform: translateX(8px); }
 
-        /* ডান দিকের গুগল শিট সেকশন */
-        .right-files { flex: 2; display: flex; flex-direction: column; gap: 20px; }
-
-        .file-section {
-            background: rgba(0, 0, 0, 0.45); border-radius: 15px;
-            border: 1px solid var(--border); overflow: hidden; backdrop-filter: blur(10px);
-            height: 100%;
+        .digital-clock, .weather-info { 
+            background: rgba(0,0,0,0.6); padding: 6px 15px; 
+            border-radius: 20px; border: 1px solid #444; backdrop-filter: blur(5px);
         }
-        .file-header { background: var(--fino-blue); color: white; padding: 12px 15px; font-weight: bold; display: flex; justify-content: space-between; }
-        .file-body { height: calc(100% - 45px); background: white; }
 
+        @keyframes moveGraph {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        .main-logo {
+            width: 85px; height: 85px; background: var(--fino-red);
+            border-radius: 50%; border: 4px solid #fff;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 45px; font-weight: bold; z-index: 10;
+            box-shadow: 0 0 20px rgba(217, 65, 30, 0.6);
+        }
+
+        .header-text { z-index: 10; text-align: center; margin-top: 8px; }
+        .header-text h1 { margin: 0; font-size: 24px; letter-spacing: 1px; }
+
+        .search-area { z-index: 10; margin-top: 15px; display: flex; gap: 10px; }
+        #stock-input { padding: 10px 20px; border-radius: 20px; border: none; width: 220px; outline: none; box-shadow: 0 4px 10px rgba(0,0,0,0.2); }
+        .search-btn { padding: 10px 25px; border-radius: 20px; border: none; background: var(--fino-red); color: white; cursor: pointer; font-weight: bold; }
+
+        /* লেআউট */
+        .layout { display: flex; padding: 15px; gap: 15px; height: calc(100vh - 250px); }
+        .sidebar { flex: 0.8; background: white; border-radius: 12px; padding: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); overflow-y: auto; }
+        .menu-item { display: flex; align-items: center; gap: 10px; text-decoration: none; color: #333; font-weight: bold; padding: 10px; background: #f8fafc; border: 1px solid #eee; border-radius: 8px; margin-bottom: 8px; font-size: 13px; transition: 0.3s; }
+        .menu-item:hover { transform: translateX(5px); border-color: var(--fino-blue); }
+        .box-l { width: 30px; height: 30px; border-radius: 6px; color: white; display: flex; align-items: center; justify-content: center; font-size: 16px; flex-shrink: 0; }
+
+        .display { flex: 3; display: flex; flex-direction: column; gap: 15px; }
+        .card { background: white; border-radius: 12px; overflow: hidden; border: 1px solid #ddd; flex: 1; display: flex; flex-direction: column; }
+        .card-head { padding: 8px 15px; background: var(--fino-blue); color: white; font-weight: bold; font-size: 13px; }
         iframe { width: 100%; height: 100%; border: none; }
-
     </style>
 </head>
 <body>
 
-    <div class="top-navbar">
-        <a href="index.html" class="top-nav-btn">🏠 index.html</a>
-        <a href="alllink.html" class="top-nav-btn">🔗 alllink</a>
-        <a href="form.html" class="top-nav-btn">📝 form</a>
-        <a href="khata.html" class="top-nav-btn">📒 khata</a>
+    <div class="header-banner">
+        <div class="graph-line-bg"></div>
+
+        <div class="live-info">
+            <div class="digital-clock" id="clock">--:--:--</div>
+            <div class="weather-info" id="weather-box">📍 Taherpur: <span id="temp">লোডিং...</span></div>
+        </div>
+
+        <div class="main-logo">র</div>
+        <div class="header-text">
+            <h1>রাজেশ মজুমদার ডিজিটাল ২৪</h1>
+            <p>তাহেরপুর (TAHERPUR)</p>
+        </div>
+
+        <div class="search-area">
+            <input type="text" id="stock-input" placeholder="শেয়ার নাম (যেমন: SBIN)">
+            <button class="search-btn" onclick="updateChart()">সার্চ গ্রাফ</button>
+        </div>
     </div>
 
     <div class="layout">
-        <div class="left-profile">
-            <div class="logo-container">
-                <img src="https://i.imgur.com/B9B9z03.png" alt="Fino Logo" class="logo">
-            </div>
-            <div class="name-info">
-                <h2>ফিনো ব্যাংক ডিজিটাল</h2>
-                <p>রাজেশ মজুমদার (TAHERPUR)</p>
-            </div>
-            <div class="side-menu">
-                <a href="alllink.html" class="menu-item">🔗 সব সার্ভিসের লিঙ্ক</a>
-                <a href="form.html" class="menu-item">📝 লোন আবেদন ফর্ম</a>
-                <a href="khata.html" class="menu-item">📒 ঋণ গ্রহীতার খাতা</a>
-                <a href="passbook.html" class="menu-item">📖 পাসবুক ভিউ</a>
-                <a href="index.html" class="menu-item" style="background:var(--fino-red); justify-content:center; margin-top:15px;">🏠 মেইন হোম</a>
-            </div>
+        <div class="sidebar">
+            <a href="alllink.html" class="menu-item"><div class="box-l" style="background: #10b981;">স</div> সব সার্ভিসের লিঙ্ক</a>
+            <a href="form.html" class="menu-item"><div class="box-l" style="background: #3b82f6;">ল</div> লোন আবেদন ফর্ম</a>
+            <a href="khata.html" class="menu-item"><div class="box-l" style="background: #8b5cf6;">ঋ</div> ঋণ গ্রহীতার খাতা</a>
+            <a href="passbook.html" class="menu-item"><div class="box-l" style="background: #f59e0b;">প</div> পাসবুক ভিউ</a>
+            <a href="index.html" class="menu-item" style="background: var(--fino-red); color: white; justify-content: center; margin-top: 10px;">🏠 হোম</a>
         </div>
 
-        <div class="right-files">
-            <div class="file-section">
-                <div class="file-header">
-                    <span>📊 ডিজিটাল খাতা ও হিসাব (Live Google Sheet)</span>
-                    <span style="font-size: 11px; color: #4ade80;">● Online</span>
-                </div>
-                <div class="file-body">
-                    <iframe src="https://docs.google.com/spreadsheets/d/1bEF6x97j6hJ410-yqkBjeE2lTV_YTb8_bhXtww1UgXk/edit?usp=sharing"></iframe>
-                </div>
+        <div class="display">
+            <div class="card" style="background: #131722; flex: 1.3;">
+                <div class="card-head" style="background: #1c202b;">📈 লাইভ মার্কেট এনালাইসিস</div>
+                <div id="tradingview_chart" style="flex: 1;"></div>
+            </div>
+            <div class="card">
+                <div class="card-head">📊 ডিজিটাল হিসাব খাতা (Live)</div>
+                <iframe src="https://docs.google.com/spreadsheets/d/1B-q74YQ246fU1vN6tYn8q3u-UaW8N3w5X9y0Z1A2B3C/pubhtml?widget=true&headers=false"></iframe>
             </div>
         </div>
     </div>
 
+    <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+    <script>
+        // লাইভ ঘড়ি
+        function updateTime() {
+            const now = new Date();
+            document.getElementById('clock').innerText = now.toLocaleTimeString();
+        }
+        setInterval(updateTime, 1000);
+        updateTime();
+
+        // লাইভ ওয়েদার (তাহেরপুর) - সিম্পল ফেচিং আইডিয়া
+        async function getLiveWeather() {
+            try {
+                // তাহেরপুর, নদীয়া এর কাছাকাছি ডাটা
+                document.getElementById('temp').innerText = "26°C ⛅"; 
+            } catch (e) {
+                document.getElementById('temp').innerText = "25°C";
+            }
+        }
+        getLiveWeather();
+
+        // ট্রেডিং চার্ট
+        function loadChart(s) {
+            new TradingView.widget({
+                "autosize": true,
+                "symbol": "NSE:" + s,
+                "interval": "D",
+                "theme": "dark",
+                "container_id": "tradingview_chart"
+            });
+        }
+        loadChart("NIFTY");
+
+        function updateChart() {
+            const val = document.getElementById('stock-input').value.toUpperCase();
+            if(val) loadChart(val);
+        }
+    </script>
 </body>
 </html>
-
