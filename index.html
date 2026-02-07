@@ -3,15 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>রাজেশ মজুমদার - স্মার্ট পোর্টাল</title>
+    <title>রাজেশ মজুমদার - স্মার্ট প্রফেশনাল পোর্টাল</title>
     <style>
         :root {
             --fino-red: #d9411e;
             --fino-blue: #1e3a8a;
             --dark-bg: #0b0e14;
+            --success-green: #10b981;
         }
 
-        /* পুরো পেজের স্ক্রলিং চালু করা হলো */
         body, html {
             margin: 0; padding: 0; font-family: 'Arial', sans-serif;
             background: #f1f5f9; height: 100%; overflow-y: auto; 
@@ -57,10 +57,6 @@
         .header-text { z-index: 10; text-align: center; margin-top: 8px; }
         .header-text h1 { margin: 0; font-size: 24px; }
 
-        .search-area { z-index: 10; margin-top: 15px; display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; }
-        #stock-input { padding: 10px 20px; border-radius: 20px; border: none; width: 220px; outline: none; }
-        .search-btn { padding: 10px 25px; border-radius: 20px; border: none; background: var(--fino-red); color: white; cursor: pointer; font-weight: bold; }
-
         .layout { 
             display: flex; flex-direction: row; padding: 20px; gap: 20px; 
             max-width: 1400px; margin: 0 auto;
@@ -68,28 +64,33 @@
 
         /* মেনু সাইডবার */
         .sidebar { flex: 1; min-width: 250px; background: white; border-radius: 15px; padding: 20px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); height: fit-content; }
-        .menu-item { display: flex; align-items: center; gap: 10px; text-decoration: none; color: #333; font-weight: bold; padding: 12px; background: #f8fafc; border: 1px solid #eee; border-radius: 10px; margin-bottom: 10px; }
-        .menu-item:hover { background: #f0f4ff; border-color: var(--fino-blue); }
+        .menu-item { display: flex; align-items: center; gap: 10px; text-decoration: none; color: #333; font-weight: bold; padding: 12px; background: #f8fafc; border: 1px solid #eee; border-radius: 10px; margin-bottom: 10px; transition: 0.3s; }
+        .menu-item:hover { background: #f0f4ff; border-color: var(--fino-blue); transform: translateX(5px); }
         .box-l { width: 32px; height: 32px; border-radius: 6px; color: white; display: flex; align-items: center; justify-content: center; font-size: 16px; flex-shrink: 0; }
 
-        /* ডান পাশের গ্রাফ ও শিট এরিয়া */
+        /* ডান পাশের কন্টেন্ট */
         .display { flex: 3; display: flex; flex-direction: column; gap: 20px; }
+        
+        /* ডাটা এন্ট্রি ফর্ম ডিজাইন */
+        .entry-card { background: white; border-radius: 15px; border-top: 5px solid var(--success-green); box-shadow: 0 5px 15px rgba(0,0,0,0.05); padding: 20px; }
+        .entry-card h3 { margin: 0 0 15px 0; color: #333; font-size: 18px; display: flex; align-items: center; gap: 10px; }
+        .form-row { display: grid; grid-template-columns: 1fr 1fr 1fr auto; gap: 15px; }
+        .form-row input { padding: 12px; border: 1px solid #ddd; border-radius: 8px; outline: none; transition: 0.3s; }
+        .form-row input:focus { border-color: var(--success-green); }
+        .submit-btn { padding: 0 25px; background: var(--success-green); color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: bold; transition: 0.3s; }
+        .submit-btn:hover { background: #059669; }
+
         .card { background: white; border-radius: 15px; overflow: hidden; border: 1px solid #ddd; display: flex; flex-direction: column; }
         .card-head { padding: 12px 20px; background: var(--fino-blue); color: white; font-weight: bold; font-size: 14px; }
         
         iframe { width: 100%; height: 500px; border: none; }
 
-        /* নতুন এন্ট্রি ফর্ম স্টাইল */
-        .entry-form { padding: 20px; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; }
-        .entry-form input { padding: 12px; border: 1px solid #ccc; border-radius: 8px; font-size: 15px; }
-        .save-data-btn { background: #10b981; color: white; border: none; padding: 12px; border-radius: 8px; font-weight: bold; cursor: pointer; transition: 0.3s; }
-        .save-data-btn:hover { background: #059669; }
-        #status-msg { text-align: center; padding-bottom: 15px; font-weight: bold; }
+        #status-msg { text-align: center; margin-top: 10px; font-weight: bold; }
 
-        @media (max-width: 768px) {
+        @media (max-width: 900px) {
             .layout { flex-direction: column; }
-            .sidebar { order: 2; }
-            .display { order: 1; }
+            .form-row { grid-template-columns: 1fr; }
+            .submit-btn { padding: 12px; }
         }
     </style>
 </head>
@@ -106,16 +107,10 @@
             <h1>রাজেশ মজুমদার ডিজিটাল ২৪</h1>
             <p>তাহেরপুর (TAHERPUR)</p>
         </div>
-        <div class="search-area">
-            <input type="text" id="stock-input" placeholder="শেয়ার কোড (Ex: SBIN)">
-            <button class="search-btn" onclick="updateChart()">সার্চ গ্রাফ</button>
-        </div>
     </div>
 
     <div class="layout">
         <div class="sidebar">
-            <a href="#entry-section" class="menu-item" style="background: #10b981; color: white;"><div class="box-l" style="background: rgba(0,0,0,0.2);">জ</div> ডিজিটাল ক্যাশ জমা</a>
-            
             <a href="alllink.html" class="menu-item"><div class="box-l" style="background: #10b981;">স</div> সব সার্ভিসের লিঙ্ক</a>
             <a href="form.html" class="menu-item"><div class="box-l" style="background: #3b82f6;">ল</div> লোন আবেদন ফর্ম</a>
             <a href="khata.html" class="menu-item"><div class="box-l" style="background: #8b5cf6;">ঋ</div> ঋণ গ্রহীতার খাতা</a>
@@ -124,24 +119,24 @@
         </div>
 
         <div class="display">
-            <div class="card" id="entry-section">
-                <div class="card-head" style="background: #10b981;">📝 কাস্টমার ডাটা এন্ট্রি (গুগল শিট)</div>
-                <form id="cashForm" class="entry-form">
+            <div class="entry-card">
+                <h3>📝 ডিজিটাল কাস্টমার এন্ট্রি</h3>
+                <form id="cashForm" class="form-row">
                     <input type="text" id="custId" placeholder="কাস্টমার আইডি" required>
                     <input type="text" id="custName" placeholder="কাস্টমারের নাম" required>
                     <input type="number" id="amount" placeholder="টাকার পরিমাণ (৳)" required>
-                    <button type="submit" id="submitBtn" class="save-data-btn">শিটে সেভ করুন</button>
+                    <button type="submit" id="submitBtn" class="submit-btn">শিটে সেভ করুন</button>
                 </form>
                 <div id="status-msg"></div>
             </div>
 
             <div class="card" style="background: #131722;">
                 <div class="card-head" style="background: #1c202b;">📈 লাইভ মার্কেট এনালাইসিস</div>
-                <div id="tradingview_chart" style="height: 500px;"></div>
+                <div id="tradingview_chart" style="height: 450px;"></div>
             </div>
             
             <div class="card">
-                <div class="card-head">📊 ডিজিটাল হিসাব খাতা ভিউ</div>
+                <div class="card-head">📊 আপনার ডিজিটাল হিসাব খাতা</div>
                 <iframe src="https://docs.google.com/spreadsheets/d/1bEF6x97j6hJ410-yqkBjeE2lTV_YTb8_bhXtww1UgXk/edit?gid=0#gid=0"></iframe>
             </div>
         </div>
@@ -149,8 +144,9 @@
 
     <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
     <script>
-        // গুগল শিট স্ক্রিপ্ট লিঙ্ক সেট করা হলো
-        const scriptURL = 'https://script.google.com/macros/s/AKfycbyPpDzvw3O0ayKY9fZT116Aolg9CuNtqOBPQ4vPrzhcY0IhxrReYHU1PMn6sUqKbjE/exec';
+        // আপনার দেওয়া নতুন লিঙ্ক এখানে বসানো হয়েছে
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbxMNegy4U9RAmozVChrCX2XtYXySEESaK9wubO2xjKvb-Vdn_66e9ilCylH-oekwbt_/exec';
+        
         const form = document.getElementById('cashForm');
         const msg = document.getElementById('status-msg');
         const btn = document.getElementById('submitBtn');
@@ -195,22 +191,14 @@
         setInterval(updateTime, 1000);
         updateTime();
 
-        function loadChart(s) {
-            new TradingView.widget({
-                "width": "100%",
-                "height": 500,
-                "symbol": "NSE:" + s,
-                "interval": "D",
-                "theme": "dark",
-                "container_id": "tradingview_chart"
-            });
-        }
-        loadChart("NIFTY");
-
-        function updateChart() {
-            const val = document.getElementById('stock-input').value.toUpperCase();
-            if(val) loadChart(val);
-        }
+        new TradingView.widget({
+            "width": "100%",
+            "height": 450,
+            "symbol": "NSE:NIFTY",
+            "interval": "D",
+            "theme": "dark",
+            "container_id": "tradingview_chart"
+        });
     </script>
 </body>
 </html>
