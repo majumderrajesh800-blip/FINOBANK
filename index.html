@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>রাজেশ মজুমদার - স্মার্ট প্রফেশনাল পোর্টাল</title>
+    <title>রাজেশ মজুমদার - স্মার্ট ড্যাশবোর্ড</title>
     <style>
         :root {
             --fino-red: #d9411e;
@@ -14,12 +14,12 @@
 
         body, html {
             margin: 0; padding: 0; font-family: 'Arial', sans-serif;
-            background: #f1f5f9; height: 100%; overflow-y: auto; 
+            background: #f1f5f9; overflow-y: auto; 
         }
 
-        /* হেডলাইন ব্যানার */
+        /* অ্যানিমেটেড গ্রাফ ব্যানার */
         .header-banner {
-            height: 250px; background: var(--dark-bg);
+            height: 220px; background: var(--dark-bg);
             position: relative; display: flex; flex-direction: column;
             justify-content: center; align-items: center;
             color: white; overflow: hidden; border-bottom: 5px solid var(--fino-red);
@@ -33,28 +33,17 @@
             z-index: 1;
         }
 
-        .live-info {
-            position: absolute; top: 15px; width: 92%;
-            display: flex; justify-content: space-between;
-            font-size: 14px; font-weight: bold; z-index: 15;
-            color: #fbbf24;
-        }
-        .digital-clock, .weather-info { 
-            background: rgba(0,0,0,0.6); padding: 6px 15px; 
-            border-radius: 20px; border: 1px solid #444; backdrop-filter: blur(5px);
-        }
-
         @keyframes moveGraph { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 
         .main-logo {
-            width: 85px; height: 85px; background: var(--fino-red);
+            width: 80px; height: 80px; background: var(--fino-red);
             border-radius: 50%; border: 4px solid #fff;
             display: flex; align-items: center; justify-content: center;
-            font-size: 45px; font-weight: bold; z-index: 10;
+            font-size: 40px; font-weight: bold; z-index: 10;
             box-shadow: 0 0 20px rgba(217, 65, 30, 0.6);
         }
 
-        .header-text { z-index: 10; text-align: center; margin-top: 8px; }
+        .header-text { z-index: 10; text-align: center; margin-top: 10px; }
         .header-text h1 { margin: 0; font-size: 24px; }
 
         .layout { 
@@ -65,78 +54,64 @@
         /* মেনু সাইডবার */
         .sidebar { flex: 1; min-width: 250px; background: white; border-radius: 15px; padding: 20px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); height: fit-content; }
         .menu-item { display: flex; align-items: center; gap: 10px; text-decoration: none; color: #333; font-weight: bold; padding: 12px; background: #f8fafc; border: 1px solid #eee; border-radius: 10px; margin-bottom: 10px; transition: 0.3s; }
-        .menu-item:hover { background: #f0f4ff; border-color: var(--fino-blue); transform: translateX(5px); }
-        .box-l { width: 32px; height: 32px; border-radius: 6px; color: white; display: flex; align-items: center; justify-content: center; font-size: 16px; flex-shrink: 0; }
+        .menu-item:hover { background: #f0f4ff; transform: translateX(5px); }
 
-        /* ডান পাশের কন্টেন্ট */
         .display { flex: 3; display: flex; flex-direction: column; gap: 20px; }
-        
-        /* ডাটা এন্ট্রি ফর্ম ডিজাইন */
-        .entry-card { background: white; border-radius: 15px; border-top: 5px solid var(--success-green); box-shadow: 0 5px 15px rgba(0,0,0,0.05); padding: 20px; }
-        .entry-card h3 { margin: 0 0 15px 0; color: #333; font-size: 18px; display: flex; align-items: center; gap: 10px; }
-        .form-row { display: grid; grid-template-columns: 1fr 1fr 1fr auto; gap: 15px; }
-        .form-row input { padding: 12px; border: 1px solid #ddd; border-radius: 8px; outline: none; transition: 0.3s; }
-        .form-row input:focus { border-color: var(--success-green); }
-        .submit-btn { padding: 0 25px; background: var(--success-green); color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: bold; transition: 0.3s; }
-        .submit-btn:hover { background: #059669; }
 
-        .card { background: white; border-radius: 15px; overflow: hidden; border: 1px solid #ddd; display: flex; flex-direction: column; }
+        /* ডাটা এন্ট্রি কার্ড */
+        .entry-card { background: white; border-radius: 15px; border-top: 5px solid var(--success-green); padding: 20px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
+        .form-row { display: grid; grid-template-columns: 1fr 1fr 1fr auto; gap: 15px; }
+        .form-row input { padding: 12px; border: 1px solid #ddd; border-radius: 8px; outline: none; }
+        .submit-btn { padding: 0 25px; background: var(--success-green); color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: bold; }
+
+        /* গ্রাফ কার্ড */
+        .card { background: #131722; border-radius: 15px; overflow: hidden; border: 1px solid #ddd; }
         .card-head { padding: 12px 20px; background: var(--fino-blue); color: white; font-weight: bold; font-size: 14px; }
         
-        iframe { width: 100%; height: 500px; border: none; }
+        iframe { width: 100%; height: 500px; border: none; border-radius: 15px; background: white; }
 
-        #status-msg { text-align: center; margin-top: 10px; font-weight: bold; }
-
-        @media (max-width: 900px) {
-            .layout { flex-direction: column; }
-            .form-row { grid-template-columns: 1fr; }
-            .submit-btn { padding: 12px; }
-        }
+        @media (max-width: 900px) { .layout { flex-direction: column; } .form-row { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
 
     <div class="header-banner">
         <div class="graph-line-bg"></div>
-        <div class="live-info">
-            <div class="digital-clock" id="clock">০০:০০:০০</div>
-            <div class="weather-info">📍 Taherpur: <span id="temp">26°C ⛅</span></div>
-        </div>
         <div class="main-logo">র</div>
         <div class="header-text">
             <h1>রাজেশ মজুমদার ডিজিটাল ২৪</h1>
-            <p>তাহেরপুর (TAHERPUR)</p>
+            <p>📍 তাহেরপুর (TAHERPUR)</p>
         </div>
     </div>
 
     <div class="layout">
         <div class="sidebar">
-            <a href="alllink.html" class="menu-item"><div class="box-l" style="background: #10b981;">স</div> সব সার্ভিসের লিঙ্ক</a>
-            <a href="form.html" class="menu-item"><div class="box-l" style="background: #3b82f6;">ল</div> লোন আবেদন ফর্ম</a>
-            <a href="khata.html" class="menu-item"><div class="box-l" style="background: #8b5cf6;">ঋ</div> ঋণ গ্রহীতার খাতা</a>
-            <a href="passbook.html" class="menu-item"><div class="box-l" style="background: #f59e0b;">প</div> পাসবুক ভিউ</a>
-            <a href="index.html" class="menu-item" style="background: var(--fino-red); color: white; justify-content: center; margin-top: 15px;">🏠 মেইন হোম</a>
+            <a href="alllink.html" class="menu-item">🔗 সব সার্ভিসের লিঙ্ক</a>
+            <a href="form.html" class="menu-item">📄 লোন আবেদন ফর্ম</a>
+            <a href="khata.html" class="menu-item">📒 ঋণ গ্রহীতার খাতা</a>
+            <a href="passbook.html" class="menu-item">📖 পাসবুক ভিউ</a>
+            <a href="index.html" class="menu-item" style="background: var(--fino-red); color: white; margin-top: 15px; justify-content: center;">🏠 মেইন হোম</a>
         </div>
 
         <div class="display">
             <div class="entry-card">
-                <h3>📝 ডিজিটাল কাস্টমার এন্ট্রি</h3>
+                <h3 style="margin:0 0 15px 0;">📝 কাস্টমার ক্যাশ এন্ট্রি (অটো-আপডেট)</h3>
                 <form id="cashForm" class="form-row">
                     <input type="text" id="custId" placeholder="কাস্টমার আইডি" required>
                     <input type="text" id="custName" placeholder="কাস্টমারের নাম" required>
                     <input type="number" id="amount" placeholder="টাকার পরিমাণ (৳)" required>
-                    <button type="submit" id="submitBtn" class="submit-btn">শিটে সেভ করুন</button>
+                    <button type="submit" id="submitBtn" class="submit-btn">সেভ করুন</button>
                 </form>
-                <div id="status-msg"></div>
+                <div id="status-msg" style="margin-top:10px; font-weight:bold; text-align:center;"></div>
             </div>
 
-            <div class="card" style="background: #131722;">
-                <div class="card-head" style="background: #1c202b;">📈 লাইভ মার্কেট এনালাইসিস</div>
-                <div id="tradingview_chart" style="height: 450px;"></div>
+            <div class="card">
+                <div class="card-head">📊 লাইভ মার্কেট এনালাইসিস</div>
+                <div id="tradingview_chart" style="height: 400px;"></div>
             </div>
             
-            <div class="card">
-                <div class="card-head">📊 আপনার ডিজিটাল হিসাব খাতা</div>
+            <div class="card" style="background: white;">
+                <div class="card-head">📋 ডিজিটাল হিসাব খাতা</div>
                 <iframe src="https://docs.google.com/spreadsheets/d/1bEF6x97j6hJ410-yqkBjeE2lTV_YTb8_bhXtww1UgXk/edit?gid=0#gid=0"></iframe>
             </div>
         </div>
@@ -144,9 +119,9 @@
 
     <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
     <script>
-        // আপনার দেওয়া নতুন লিঙ্ক এখানে বসানো হয়েছে
-        const scriptURL = 'https://script.google.com/macros/s/AKfycbxMNegy4U9RAmozVChrCX2XtYXySEESaK9wubO2xjKvb-Vdn_66e9ilCylH-oekwbt_/exec';
-        
+        // আপনার নতুন গুগল স্ক্রিপ্ট লিঙ্কটি এখানে আপডেট করে দেওয়া হয়েছে
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbwZ6cVSqOQCy3R22-JXRgzmUC6tDIHXHkVQZxlFjbNWA0V62sf7ZuiCxyMSzBA1sbnDmg/exec';
+
         const form = document.getElementById('cashForm');
         const msg = document.getElementById('status-msg');
         const btn = document.getElementById('submitBtn');
@@ -155,8 +130,7 @@
             e.preventDefault();
             btn.disabled = true;
             btn.innerText = "পাঠানো হচ্ছে...";
-            msg.innerText = "";
-
+            
             const data = {
                 id: document.getElementById('custId').value,
                 name: document.getElementById('custName').value,
@@ -166,34 +140,27 @@
             fetch(scriptURL, {
                 method: 'POST',
                 mode: 'no-cors',
-                cache: 'no-cache',
                 body: JSON.stringify(data)
             })
             .then(() => {
                 msg.style.color = "#10b981";
-                msg.innerText = "সফলভাবে গুগল শিটে সেভ হয়েছে! ✅";
+                msg.innerText = "সফলভাবে সেভ হয়েছে! ✅";
                 form.reset();
                 btn.disabled = false;
-                btn.innerText = "শিটে সেভ করুন";
+                btn.innerText = "সেভ করুন";
             })
-            .catch(error => {
+            .catch(() => {
                 msg.style.color = "#d9411e";
-                msg.innerText = "ভুল হয়েছে! আবার চেষ্টা করুন।";
+                msg.innerText = "এরর! আবার চেষ্টা করুন।";
                 btn.disabled = false;
-                btn.innerText = "শিটে সেভ করুন";
+                btn.innerText = "সেভ করুন";
             });
         });
 
-        function updateTime() {
-            const now = new Date();
-            document.getElementById('clock').innerText = now.toLocaleTimeString();
-        }
-        setInterval(updateTime, 1000);
-        updateTime();
-
+        // ট্রেডিংভিউ চার্ট লোড
         new TradingView.widget({
             "width": "100%",
-            "height": 450,
+            "height": 400,
             "symbol": "NSE:NIFTY",
             "interval": "D",
             "theme": "dark",
