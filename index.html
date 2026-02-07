@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>রাজেশ মজুমদার - প্রো ড্যাশবোর্ড</title>
+    <title>রাজেশ মজুমদার - স্মার্ট পোর্টাল</title>
     <style>
         :root {
             --fino-red: #d9411e;
@@ -11,12 +11,13 @@
             --dark-bg: #0b0e14;
         }
 
+        /* পুরো পেজের স্ক্রলিং চালু করা হলো */
         body, html {
             margin: 0; padding: 0; font-family: 'Arial', sans-serif;
-            background: #f1f5f9; height: 100vh; overflow: hidden;
+            background: #f1f5f9; height: 100%; overflow-y: auto; 
         }
 
-        /* হেডলাইন ব্যানার */
+        /* হেডলাইন ব্যানার - এটা ওপরের দিকে স্থির থাকবে */
         .header-banner {
             height: 250px; background: var(--dark-bg);
             position: relative; display: flex; flex-direction: column;
@@ -24,7 +25,6 @@
             color: white; overflow: hidden; border-bottom: 5px solid var(--fino-red);
         }
 
-        /* অরিজিনাল গ্রাফ লাইন ব্যাকগ্রাউন্ড */
         .graph-line-bg {
             position: absolute; top: 0; left: 0; width: 200%; height: 100%;
             background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="300" viewBox="0 0 1000 300"><path d="M0,200 L100,150 L200,180 L300,80 L400,120 L500,50 L600,150 L700,110 L800,180 L900,100 L1000,130" fill="none" stroke="%2326a69a" stroke-width="2" opacity="0.4" /></svg>');
@@ -33,23 +33,19 @@
             z-index: 1;
         }
 
-        /* লাইভ তথ্য (টাইম ও ওয়েদার) */
+        /* টাইম ও লাইভ ওয়েদার */
         .live-info {
             position: absolute; top: 15px; width: 92%;
             display: flex; justify-content: space-between;
             font-size: 14px; font-weight: bold; z-index: 15;
             color: #fbbf24;
         }
-
         .digital-clock, .weather-info { 
             background: rgba(0,0,0,0.6); padding: 6px 15px; 
             border-radius: 20px; border: 1px solid #444; backdrop-filter: blur(5px);
         }
 
-        @keyframes moveGraph {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-50%); }
-        }
+        @keyframes moveGraph { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 
         .main-logo {
             width: 85px; height: 85px; background: var(--fino-red);
@@ -60,43 +56,54 @@
         }
 
         .header-text { z-index: 10; text-align: center; margin-top: 8px; }
-        .header-text h1 { margin: 0; font-size: 24px; letter-spacing: 1px; }
+        .header-text h1 { margin: 0; font-size: 24px; }
 
-        .search-area { z-index: 10; margin-top: 15px; display: flex; gap: 10px; }
-        #stock-input { padding: 10px 20px; border-radius: 20px; border: none; width: 220px; outline: none; box-shadow: 0 4px 10px rgba(0,0,0,0.2); }
+        .search-area { z-index: 10; margin-top: 15px; display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; }
+        #stock-input { padding: 10px 20px; border-radius: 20px; border: none; width: 220px; outline: none; }
         .search-btn { padding: 10px 25px; border-radius: 20px; border: none; background: var(--fino-red); color: white; cursor: pointer; font-weight: bold; }
 
-        /* লেআউট */
-        .layout { display: flex; padding: 15px; gap: 15px; height: calc(100vh - 250px); }
-        .sidebar { flex: 0.8; background: white; border-radius: 12px; padding: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); overflow-y: auto; }
-        .menu-item { display: flex; align-items: center; gap: 10px; text-decoration: none; color: #333; font-weight: bold; padding: 10px; background: #f8fafc; border: 1px solid #eee; border-radius: 8px; margin-bottom: 8px; font-size: 13px; transition: 0.3s; }
-        .menu-item:hover { transform: translateX(5px); border-color: var(--fino-blue); }
-        .box-l { width: 30px; height: 30px; border-radius: 6px; color: white; display: flex; align-items: center; justify-content: center; font-size: 16px; flex-shrink: 0; }
+        /* মেইন কন্টেইনার - এবার এটা ওপর-নিচ হবে */
+        .layout { 
+            display: flex; flex-direction: row; padding: 20px; gap: 20px; 
+            max-width: 1400px; margin: 0 auto;
+        }
 
-        .display { flex: 3; display: flex; flex-direction: column; gap: 15px; }
-        .card { background: white; border-radius: 12px; overflow: hidden; border: 1px solid #ddd; flex: 1; display: flex; flex-direction: column; }
-        .card-head { padding: 8px 15px; background: var(--fino-blue); color: white; font-weight: bold; font-size: 13px; }
-        iframe { width: 100%; height: 100%; border: none; }
+        /* মেনু সাইডবার */
+        .sidebar { flex: 1; min-width: 250px; background: white; border-radius: 15px; padding: 20px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); height: fit-content; }
+        .menu-item { display: flex; align-items: center; gap: 10px; text-decoration: none; color: #333; font-weight: bold; padding: 12px; background: #f8fafc; border: 1px solid #eee; border-radius: 10px; margin-bottom: 10px; }
+        .menu-item:hover { background: #f0f4ff; border-color: var(--fino-blue); }
+        .box-l { width: 32px; height: 32px; border-radius: 6px; color: white; display: flex; align-items: center; justify-content: center; font-size: 16px; flex-shrink: 0; }
+
+        /* ডান পাশের গ্রাফ ও শিট এরিয়া */
+        .display { flex: 3; display: flex; flex-direction: column; gap: 20px; }
+        .card { background: white; border-radius: 15px; overflow: hidden; border: 1px solid #ddd; display: flex; flex-direction: column; min-height: 450px; }
+        .card-head { padding: 12px 20px; background: var(--fino-blue); color: white; font-weight: bold; font-size: 14px; }
+        
+        iframe { width: 100%; height: 500px; border: none; }
+
+        /* মোবাইলের জন্য সেটিংস */
+        @media (max-width: 768px) {
+            .layout { flex-direction: column; }
+            .sidebar { order: 2; }
+            .display { order: 1; }
+        }
     </style>
 </head>
 <body>
 
     <div class="header-banner">
         <div class="graph-line-bg"></div>
-
         <div class="live-info">
-            <div class="digital-clock" id="clock">--:--:--</div>
-            <div class="weather-info" id="weather-box">📍 Taherpur: <span id="temp">লোডিং...</span></div>
+            <div class="digital-clock" id="clock">০০:০০:০০</div>
+            <div class="weather-info">📍 Taherpur: <span id="temp">26°C ⛅</span></div>
         </div>
-
         <div class="main-logo">র</div>
         <div class="header-text">
             <h1>রাজেশ মজুমদার ডিজিটাল ২৪</h1>
             <p>তাহেরপুর (TAHERPUR)</p>
         </div>
-
         <div class="search-area">
-            <input type="text" id="stock-input" placeholder="শেয়ার নাম (যেমন: SBIN)">
+            <input type="text" id="stock-input" placeholder="শেয়ার কোড (Ex: SBIN)">
             <button class="search-btn" onclick="updateChart()">সার্চ গ্রাফ</button>
         </div>
     </div>
@@ -107,16 +114,17 @@
             <a href="form.html" class="menu-item"><div class="box-l" style="background: #3b82f6;">ল</div> লোন আবেদন ফর্ম</a>
             <a href="khata.html" class="menu-item"><div class="box-l" style="background: #8b5cf6;">ঋ</div> ঋণ গ্রহীতার খাতা</a>
             <a href="passbook.html" class="menu-item"><div class="box-l" style="background: #f59e0b;">প</div> পাসবুক ভিউ</a>
-            <a href="index.html" class="menu-item" style="background: var(--fino-red); color: white; justify-content: center; margin-top: 10px;">🏠 হোম</a>
+            <a href="index.html" class="menu-item" style="background: var(--fino-red); color: white; justify-content: center; margin-top: 15px;">🏠 মেইন হোম</a>
         </div>
 
         <div class="display">
-            <div class="card" style="background: #131722; flex: 1.3;">
+            <div class="card" style="background: #131722;">
                 <div class="card-head" style="background: #1c202b;">📈 লাইভ মার্কেট এনালাইসিস</div>
-                <div id="tradingview_chart" style="flex: 1;"></div>
+                <div id="tradingview_chart" style="height: 500px;"></div>
             </div>
+            
             <div class="card">
-                <div class="card-head">📊 ডিজিটাল হিসাব খাতা (Live)</div>
+                <div class="card-head">📊 ডিজিটাল হিসাব খাতা</div>
                 <iframe src="https://docs.google.com/spreadsheets/d/1B-q74YQ246fU1vN6tYn8q3u-UaW8N3w5X9y0Z1A2B3C/pubhtml?widget=true&headers=false"></iframe>
             </div>
         </div>
@@ -124,7 +132,6 @@
 
     <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
     <script>
-        // লাইভ ঘড়ি
         function updateTime() {
             const now = new Date();
             document.getElementById('clock').innerText = now.toLocaleTimeString();
@@ -132,21 +139,10 @@
         setInterval(updateTime, 1000);
         updateTime();
 
-        // লাইভ ওয়েদার (তাহেরপুর) - সিম্পল ফেচিং আইডিয়া
-        async function getLiveWeather() {
-            try {
-                // তাহেরপুর, নদীয়া এর কাছাকাছি ডাটা
-                document.getElementById('temp').innerText = "26°C ⛅"; 
-            } catch (e) {
-                document.getElementById('temp').innerText = "25°C";
-            }
-        }
-        getLiveWeather();
-
-        // ট্রেডিং চার্ট
         function loadChart(s) {
             new TradingView.widget({
-                "autosize": true,
+                "width": "100%",
+                "height": 500,
                 "symbol": "NSE:" + s,
                 "interval": "D",
                 "theme": "dark",
