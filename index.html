@@ -12,163 +12,156 @@
             --success-green: #10b981;
         }
 
-        body, html {
-            margin: 0; padding: 0; font-family: 'Arial', sans-serif;
-            background: #f1f5f9; overflow-y: auto; 
-        }
+        body, html { margin: 0; padding: 0; font-family: 'Arial', sans-serif; background: #f1f5f9; }
+
+        /* লগইন সেকশন */
+        #auth-section { display: flex; justify-content: center; align-items: center; height: 100vh; background: var(--dark-bg); }
+        .login-card { background: white; padding: 40px; border-radius: 15px; width: 320px; text-align: center; border-top: 6px solid var(--fino-red); box-shadow: 0 10px 25px rgba(0,0,0,0.3); }
+        .login-card input { width: 100%; padding: 12px; margin: 10px 0; border: 1px solid #ddd; border-radius: 8px; box-sizing: border-box; }
+        .login-btn { width: 100%; padding: 12px; background: var(--fino-blue); color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: bold; }
+
+        /* মেইন ড্যাশবোর্ড */
+        #main-dashboard { display: none; }
 
         /* অ্যানিমেটেড গ্রাফ ব্যানার */
         .header-banner {
-            height: 220px; background: var(--dark-bg);
-            position: relative; display: flex; flex-direction: column;
-            justify-content: center; align-items: center;
-            color: white; overflow: hidden; border-bottom: 5px solid var(--fino-red);
+            height: 220px; background: var(--dark-bg); position: relative; 
+            display: flex; flex-direction: column; justify-content: center; 
+            align-items: center; color: white; overflow: hidden; border-bottom: 5px solid var(--fino-red);
         }
-
         .graph-line-bg {
             position: absolute; top: 0; left: 0; width: 200%; height: 100%;
             background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="300" viewBox="0 0 1000 300"><path d="M0,200 L100,150 L200,180 L300,80 L400,120 L500,50 L600,150 L700,110 L800,180 L900,100 L1000,130" fill="none" stroke="%2326a69a" stroke-width="2" opacity="0.4" /></svg>');
-            background-repeat: repeat-x;
-            animation: moveGraph 30s linear infinite;
-            z-index: 1;
+            background-repeat: repeat-x; animation: moveGraph 30s linear infinite; z-index: 1;
         }
-
         @keyframes moveGraph { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 
-        .main-logo {
-            width: 80px; height: 80px; background: var(--fino-red);
-            border-radius: 50%; border: 4px solid #fff;
-            display: flex; align-items: center; justify-content: center;
-            font-size: 40px; font-weight: bold; z-index: 10;
-            box-shadow: 0 0 20px rgba(217, 65, 30, 0.6);
-        }
-
+        .main-logo { width: 80px; height: 80px; background: var(--fino-red); border-radius: 50%; border: 4px solid #fff; display: flex; align-items: center; justify-content: center; font-size: 40px; font-weight: bold; z-index: 10; }
         .header-text { z-index: 10; text-align: center; margin-top: 10px; }
-        .header-text h1 { margin: 0; font-size: 24px; }
 
-        .layout { 
-            display: flex; flex-direction: row; padding: 20px; gap: 20px; 
-            max-width: 1400px; margin: 0 auto;
-        }
-
-        /* মেনু সাইডবার */
+        .layout { display: flex; padding: 20px; gap: 20px; max-width: 1400px; margin: 0 auto; }
         .sidebar { flex: 1; min-width: 250px; background: white; border-radius: 15px; padding: 20px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); height: fit-content; }
-        .menu-item { display: flex; align-items: center; gap: 10px; text-decoration: none; color: #333; font-weight: bold; padding: 12px; background: #f8fafc; border: 1px solid #eee; border-radius: 10px; margin-bottom: 10px; transition: 0.3s; }
+        .menu-item { display: flex; align-items: center; gap: 10px; text-decoration: none; color: #333; font-weight: bold; padding: 12px; background: #f8fafc; border: 1px solid #eee; border-radius: 10px; margin-bottom: 10px; transition: 0.3s; cursor: pointer; }
         .menu-item:hover { background: #f0f4ff; transform: translateX(5px); }
 
         .display { flex: 3; display: flex; flex-direction: column; gap: 20px; }
 
-        /* ডাটা এন্ট্রি কার্ড */
+        /* সার্ভিস গ্রিড */
+        .service-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 12px; margin-top: 15px; }
+        .s-card { background: white; padding: 15px; border-radius: 12px; text-align: center; text-decoration: none; color: #333; font-weight: bold; font-size: 13px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); border-bottom: 4px solid var(--fino-red); transition: 0.3s; }
+        .s-card:hover { transform: translateY(-5px); background: #fff5f2; }
+
         .entry-card { background: white; border-radius: 15px; border-top: 5px solid var(--success-green); padding: 20px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
         .form-row { display: grid; grid-template-columns: 1fr 1fr 1fr auto; gap: 15px; }
-        .form-row input { padding: 12px; border: 1px solid #ddd; border-radius: 8px; outline: none; }
+        .form-row input { padding: 12px; border: 1px solid #ddd; border-radius: 8px; }
         .submit-btn { padding: 0 25px; background: var(--success-green); color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: bold; }
 
-        /* গ্রাফ কার্ড */
-        .card { background: #131722; border-radius: 15px; overflow: hidden; border: 1px solid #ddd; }
-        .card-head { padding: 12px 20px; background: var(--fino-blue); color: white; font-weight: bold; font-size: 14px; }
-        
-        iframe { width: 100%; height: 500px; border: none; border-radius: 15px; background: white; }
-
-        @media (max-width: 900px) { .layout { flex-direction: column; } .form-row { grid-template-columns: 1fr; } }
+        iframe { width: 100%; height: 500px; border: none; border-radius: 15px; }
     </style>
 </head>
 <body>
 
-    <div class="header-banner">
-        <div class="graph-line-bg"></div>
-        <div class="main-logo">র</div>
-        <div class="header-text">
-            <h1>রাজেশ মজুমদার ডিজিটাল ২৪</h1>
-            <p>📍 তাহেরপুর (TAHERPUR)</p>
+    <div id="auth-section">
+        <div class="login-card">
+            <h2 style="color:var(--fino-blue);">অ্যাডমিন লগইন</h2>
+            <input type="text" id="adminUser" placeholder="ইউজার আইডি (admin)">
+            <input type="password" id="adminPass" placeholder="পাসওয়ার্ড (admin)">
+            <button class="login-btn" onclick="checkLogin()">প্রবেশ করুন</button>
         </div>
     </div>
 
-    <div class="layout">
-        <div class="sidebar">
-            <a href="alllink.html" class="menu-item">🔗 সব সার্ভিসের লিঙ্ক</a>
-            <a href="form.html" class="menu-item">📄 লোন আবেদন ফর্ম</a>
-            <a href="khata.html" class="menu-item">📒 ঋণ গ্রহীতার খাতা</a>
-            <a href="passbook.html" class="menu-item">📖 পাসবুক ভিউ</a>
-            <a href="index.html" class="menu-item" style="background: var(--fino-red); color: white; margin-top: 15px; justify-content: center;">🏠 মেইন হোম</a>
+    <div id="main-dashboard">
+        <div class="header-banner">
+            <div class="graph-line-bg"></div>
+            <div class="main-logo">র</div>
+            <div class="header-text"><h1>রাজেশ মজুমদার ডিজিটাল ২৪</h1><p>📍 তাহেরপুর (TAHERPUR)</p></div>
         </div>
 
-        <div class="display">
-            <div class="entry-card">
-                <h3 style="margin:0 0 15px 0;">📝 কাস্টমার ক্যাশ এন্ট্রি (অটো-আপডেট)</h3>
-                <form id="cashForm" class="form-row">
-                    <input type="text" id="custId" placeholder="কাস্টমার আইডি" required>
-                    <input type="text" id="custName" placeholder="কাস্টমারের নাম" required>
-                    <input type="number" id="amount" placeholder="টাকার পরিমাণ (৳)" required>
-                    <button type="submit" id="submitBtn" class="submit-btn">সেভ করুন</button>
-                </form>
-                <div id="status-msg" style="margin-top:10px; font-weight:bold; text-align:center;"></div>
+        <div class="layout">
+            <div class="sidebar">
+                <div class="menu-item" onclick="showTab('services')">🔗 সব সার্ভিসের লিঙ্ক</div>
+                <a href="form.html" class="menu-item">📄 লোন আবেদন ফর্ম</a>
+                <a href="khata.html" class="menu-item">📒 ঋণ গ্রহীতার খাতা</a>
+                <a href="passbook.html" class="menu-item">📖 পাসবুক ভিউ</a>
+                <div class="menu-item" onclick="showTab('cash-entry')">📊 ক্যাশ এন্ট্রি ও খাতা</div>
+                <button onclick="location.reload()" class="menu-item" style="background: var(--fino-red); color: white; margin-top: 20px; width: 100%; border:none; justify-content:center;">🔒 লগআউট</button>
             </div>
 
-            <div class="card">
-                <div class="card-head">📊 লাইভ মার্কেট এনালাইসিস</div>
-                <div id="tradingview_chart" style="height: 400px;"></div>
-            </div>
-            
-            <div class="card" style="background: white;">
-                <div class="card-head">📋 ডিজিটাল হিসাব খাতা</div>
-                <iframe src="https://docs.google.com/spreadsheets/d/1bEF6x97j6hJ410-yqkBjeE2lTV_YTb8_bhXtww1UgXk/edit?gid=0#gid=0"></iframe>
+            <div class="display">
+                <div id="services" class="tab-content">
+                    <div class="service-grid">
+                        <a href="https://banglarbhumi.gov.in" target="_blank" class="s-card">বাংলার ভূমি</a>
+                        <a href="https://myaadhaar.uidai.gov.in" target="_blank" class="s-card">আধার সার্ভিস</a>
+                        <a href="https://voters.eci.gov.in" target="_blank" class="s-card">ভোটার কার্ড</a>
+                        <a href="https://www.onlineservices.nsdl.com" target="_blank" class="s-card">প্যান কার্ড</a>
+                        <a href="https://food.wb.gov.in" target="_blank" class="s-card">রেশন কার্ড</a>
+                        <a href="https://swasthyasathi.gov.in" target="_blank" class="s-card">স্বাস্থ্য সাথী</a>
+                        <a href="https://pmkisan.gov.in" target="_blank" class="s-card">PM কিষাণ</a>
+                        <a href="https://www.wbsedcl.in" target="_blank" class="s-card">বিদ্যুৎ বিল</a>
+                        <a href="https://parivahan.gov.in" target="_blank" class="s-card">লাইসেন্স সার্ভিস</a>
+                        <a href="https://www.passportindia.gov.in" target="_blank" class="s-card">পাসপোর্ট</a>
+                        <a href="https://www.irctc.co.in" target="_blank" class="s-card">ট্রেন টিকিট</a>
+                        <a href="https://nfsa.gov.in" target="_blank" class="s-card">রেশন কার্ড স্ট্যাটাস</a>
+                        <a href="https://www.onlinesbi.sbi" target="_blank" class="s-card">SBI নেট ব্যাংকিং</a>
+                        <a href="https://www.pnbindia.in" target="_blank" class="s-card">PNB ব্যাংকিং</a>
+                        </div>
+                </div>
+
+                <div id="cash-entry" class="tab-content" style="display:none;">
+                    <div class="entry-card">
+                        <h3 style="margin:0 0 15px 0;">📝 কাস্টমার ক্যাশ এন্ট্রি</h3>
+                        <form id="cashForm" class="form-row">
+                            <input type="text" id="custId" placeholder="কাস্টমার আইডি" required>
+                            <input type="text" id="custName" placeholder="নাম" required>
+                            <input type="number" id="amount" placeholder="পরিমাণ (৳)" required>
+                            <button type="submit" id="submitBtn" class="submit-btn">সেভ</button>
+                        </form>
+                    </div>
+                    <div style="margin-top:20px; background: white; border-radius: 15px; overflow: hidden; border: 1px solid #ddd;">
+                        <div style="padding: 10px; background: var(--fino-blue); color: white; font-weight: bold;">📋 ডিজিটাল হিসাব খাতা</div>
+                        <iframe src="https://docs.google.com/spreadsheets/d/1bEF6x97j6hJ410-yqkBjeE2lIV_VIb8_bhXtww1UgXk/edit?gid=0#gid=0"></iframe>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 
-    <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
     <script>
-        // আপনার নতুন গুগল স্ক্রিপ্ট লিঙ্কটি এখানে আপডেট করে দেওয়া হয়েছে
+        function checkLogin() {
+            const user = document.getElementById('adminUser').value;
+            const pass = document.getElementById('adminPass').value;
+            if(user === "me" && pass === "me") {
+                document.getElementById('auth-section').style.display = 'none';
+                document.getElementById('main-dashboard').style.display = 'block';
+            } else { alert("ভুল আইডি বা পাসওয়ার্ড!"); }
+        }
+
+        function showTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(t => t.style.display = 'none');
+            document.getElementById(tabId).style.display = 'block';
+        }
+
         const scriptURL = 'https://script.google.com/macros/s/AKfycbxSWdgtlEsKjBuZ0LmP51dUHuK5rEtqr1bEB28tbNIDebxDFGtK7P1KUwQMMcCcdPp8/exec';
-
         const form = document.getElementById('cashForm');
-        const msg = document.getElementById('status-msg');
-        const btn = document.getElementById('submitBtn');
-
+        
         form.addEventListener('submit', e => {
             e.preventDefault();
-            btn.disabled = true;
-            btn.innerText = "পাঠানো হচ্ছে...";
-            
-            const data = {
-                id: document.getElementById('custId').value,
-                name: document.getElementById('custName').value,
-                amount: document.getElementById('amount').value
-            };
-
+            const btn = document.getElementById('submitBtn');
+            btn.disabled = true; btn.innerText = "লোডিং...";
             fetch(scriptURL, {
                 method: 'POST',
                 mode: 'no-cors',
-                body: JSON.stringify(data)
-            })
-            .then(() => {
-                msg.style.color = "#10b981";
-                msg.innerText = "সফলভাবে সেভ হয়েছে! ✅";
+                body: JSON.stringify({
+                    id: document.getElementById('custId').value,
+                    name: document.getElementById('custName').value,
+                    amount: document.getElementById('amount').value
+                })
+            }).then(() => {
+                alert("সেভ হয়েছে!");
                 form.reset();
-                btn.disabled = false;
-                btn.innerText = "সেভ করুন";
-            })
-            .catch(() => {
-                msg.style.color = "#d9411e";
-                msg.innerText = "এরর! আবার চেষ্টা করুন।";
-                btn.disabled = false;
-                btn.innerText = "সেভ করুন";
+                btn.disabled = false; btn.innerText = "সেভ";
             });
-        });
-
-        // ট্রেডিংভিউ চার্ট লোড
-        new TradingView.widget({
-            "width": "100%",
-            "height": 400,
-            "symbol": "NSE:NIFTY",
-            "interval": "D",
-            "theme": "dark",
-            "container_id": "tradingview_chart"
         });
     </script>
 </body>
 </html>
-
-
-
